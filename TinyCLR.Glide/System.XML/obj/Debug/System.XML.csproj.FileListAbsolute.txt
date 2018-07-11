@@ -1,0 +1,8 @@
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csprojAssemblyReference.cache
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csproj.CoreCompileInputs.cache
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\bin\Debug\System.XML.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\bin\Debug\System.XML.pdb
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\bin\Debug\mscorlib.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csproj.CopyComplete
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.pdb

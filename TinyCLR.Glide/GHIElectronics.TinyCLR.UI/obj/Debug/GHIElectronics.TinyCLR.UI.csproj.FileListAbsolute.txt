@@ -1,0 +1,10 @@
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\obj\Debug\GHIElectronics.TinyCLR.UI.csprojAssemblyReference.cache
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\obj\Debug\GHIElectronics.TinyCLR.UI.csproj.CoreCompileInputs.cache
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\bin\Debug\GHIElectronics.TinyCLR.UI.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\bin\Debug\GHIElectronics.TinyCLR.UI.pdb
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\bin\Debug\GHIElectronics.TinyCLR.Devices.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\bin\Debug\GHIElectronics.TinyCLR.Drawing.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\bin\Debug\mscorlib.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\obj\Debug\GHIElectronics.TinyCLR.UI.csproj.CopyComplete
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\obj\Debug\GHIElectronics.TinyCLR.UI.dll
+C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.UI\obj\Debug\GHIElectronics.TinyCLR.UI.pdb

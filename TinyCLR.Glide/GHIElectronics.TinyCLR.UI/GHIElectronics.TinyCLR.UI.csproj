@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props" Condition="Exists('..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C3903B5D-1126-44F5-A2FE-C774D84C5417}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GHIElectronics.TinyCLR.UI</RootNamespace>
+    <AssemblyName>GHIElectronics.TinyCLR.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="Bitmap.cs" />
+    <Compile Include="CancelEventArgs.cs" />
+    <Compile Include="CancelEventHandler.cs" />
+    <Compile Include="Controls\Border.cs" />
+    <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\Canvas.cs" />
+    <Compile Include="Controls\ContentControl.cs" />
+    <Compile Include="Controls\Control.cs" />
+    <Compile Include="Controls\Image.cs" />
+    <Compile Include="Controls\ListBox.cs" />
+    <Compile Include="Controls\ListBoxItem.cs" />
+    <Compile Include="Controls\ListBoxItemCollection.cs" />
+    <Compile Include="Controls\Orientation.cs" />
+    <Compile Include="Controls\Panel.cs" />
+    <Compile Include="Controls\ScrollChangedEventArgs.cs" />
+    <Compile Include="Controls\ScrollChangedEventHandler.cs" />
+    <Compile Include="Controls\ScrollingStyle.cs" />
+    <Compile Include="Controls\ScrollViewer.cs" />
+    <Compile Include="Controls\SelectionChangedEventArgs.cs" />
+    <Compile Include="Controls\SelectionChangedEventHandler.cs" />
+    <Compile Include="Controls\StackPanel.cs" />
+    <Compile Include="Controls\Text.cs" />
+    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="Controls\TextChangedEventArgs.cs" />
+    <Compile Include="Controls\TextChangedEventHandler.cs" />
+    <Compile Include="Controls\TextFlow.cs" />
+    <Compile Include="Controls\TextRun.cs" />
+    <Compile Include="Controls\TextRunCollection.cs" />
+    <Compile Include="EventHandler.cs" />
+    <Compile Include="EventRoute.cs" />
+    <Compile Include="HorizontalAlignment.cs" />
+    <Compile Include="Input\BaseEvent.cs" />
+    <Compile Include="Input\ButtonDevice.cs" />
+    <Compile Include="Input\ButtonEventArgs.cs" />
+    <Compile Include="Input\ButtonEventHandler.cs" />
+    <Compile Include="Input\Buttons.cs" />
+    <Compile Include="Input\ButtonState.cs" />
+    <Compile Include="Input\CaptureMode.cs" />
+    <Compile Include="Input\FocusChangedEventArgs.cs" />
+    <Compile Include="Input\FocusChangedEventHandler.cs" />
+    <Compile Include="Input\GenericDevice.cs" />
+    <Compile Include="Input\GenericEvent.cs" />
+    <Compile Include="Input\GenericEventArgs.cs" />
+    <Compile Include="Input\GenericEventHandler.cs" />
+    <Compile Include="Input\GenericEvents.cs" />
+    <Compile Include="Input\HardwareButton.cs" />
+    <Compile Include="Input\InputDevice.cs" />
+    <Compile Include="Input\InputEventArgs.cs" />
+    <Compile Include="Input\InputEventHandler.cs" />
+    <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Input\InputProvider.cs" />
+    <Compile Include="Input\InputProviderSite.cs" />
+    <Compile Include="Input\InputReport.cs" />
+    <Compile Include="Input\InputReportArgs.cs" />
+    <Compile Include="Input\InputReportEventArgs.cs" />
+    <Compile Include="Input\InputReportEventHandler.cs" />
+    <Compile Include="Input\NotifyInputEventArgs.cs" />
+    <Compile Include="Input\NotifyInputEventHandler.cs" />
+    <Compile Include="Input\PreProcessInputEventArgs.cs" />
+    <Compile Include="Input\PreProcessInputEventHandler.cs" />
+    <Compile Include="Input\ProcessInputEventArgs.cs" />
+    <Compile Include="Input\ProcessInputEventHandler.cs" />
+    <Compile Include="Input\RawButtonActions.cs" />
+    <Compile Include="Input\RawButtonInputReport.cs" />
+    <Compile Include="Input\RawGenericInputReport.cs" />
+    <Compile Include="Input\RawTouchActions.cs" />
+    <Compile Include="Input\RawTouchInputReport.cs" />
+    <Compile Include="Input\StagingAreaInputItem.cs" />
+    <Compile Include="Input\TouchCapture.cs" />
+    <Compile Include="Input\TouchDevice.cs" />
+    <Compile Include="Input\TouchEvent.cs" />
+    <Compile Include="Input\TouchEventArgs.cs" />
+    <Compile Include="Input\TouchEventHandler.cs" />
+    <Compile Include="Input\TouchEvents.cs" />
+    <Compile Include="Input\TouchGesture.cs" />
+    <Compile Include="Input\TouchGestureEventArgs.cs" />
+    <Compile Include="Input\TouchGestureEventHandler.cs" />
+    <Compile Include="Input\TouchInput.cs" />
+    <Compile Include="Input\TouchMessages.cs" />
+    <Compile Include="LayoutManager.cs" />
+    <Compile Include="Media\Brush.cs" />
+    <Compile Include="Media\BrushMappingMode.cs" />
+    <Compile Include="Media\Color.cs" />
+    <Compile Include="Media\Colors.cs" />
+    <Compile Include="Media\Constants.cs" />
+    <Compile Include="Media\DrawingContext.cs" />
+    <Compile Include="Media\ImageBrush.cs" />
+    <Compile Include="Media\ImageSource.cs" />
+    <Compile Include="Media\Imaging\BitmapImage.cs" />
+    <Compile Include="Media\Imaging\BitmapSource.cs" />
+    <Compile Include="Media\LinearGradientBrush.cs" />
+    <Compile Include="Media\MediaContext.cs" />
+    <Compile Include="Media\Pen.cs" />
+    <Compile Include="Media\SolidColorBrush.cs" />
+    <Compile Include="Media\Stretch.cs" />
+    <Compile Include="Media\TextAlignment.cs" />
+    <Compile Include="Media\TextTrimming.cs" />
+    <Compile Include="OnScreenKeyboard.cs" />
+    <Compile Include="PostRenderEventHandler.cs" />
+    <Compile Include="PresentationSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyChangedEventArgs.cs" />
+    <Compile Include="PropertyChangedEventHandler.cs" />
+    <Compile Include="ReasonSessionEnding.cs" />
+    <Compile Include="Resources.cs" />
+    <Compile Include="RoutedEvent.cs" />
+    <Compile Include="RoutedEventArgs.cs" />
+    <Compile Include="RoutedEventHandler.cs" />
+    <Compile Include="RoutedEventHandlerInfo.cs" />
+    <Compile Include="RouteItem.cs" />
+    <Compile Include="RoutingStrategy.cs" />
+    <Compile Include="Shapes\Direction.cs" />
+    <Compile Include="Shapes\Ellipse.cs" />
+    <Compile Include="Shapes\Line.cs" />
+    <Compile Include="Shapes\Polygon.cs" />
+    <Compile Include="Shapes\Rectangle.cs" />
+    <Compile Include="Shapes\Shape.cs" />
+    <Compile Include="ShutdownMode.cs" />
+    <Compile Include="SizeToContent.cs" />
+    <Compile Include="Threading\Dispatcher.cs" />
+    <Compile Include="Threading\DispatcherExceptionEventHandler.cs" />
+    <Compile Include="Threading\DispatcherFrame.cs" />
+    <Compile Include="Threading\DispatcherObject.cs" />
+    <Compile Include="Threading\DispatcherOperation.cs" />
+    <Compile Include="Threading\DispatcherOperationCallback.cs" />
+    <Compile Include="Threading\DispatcherOperationStatus.cs" />
+    <Compile Include="Threading\DispatcherTimer.cs" />
+    <Compile Include="UIElement.cs" />
+    <Compile Include="UIElementCollection.cs" />
+    <Compile Include="VerticalAlignment.cs" />
+    <Compile Include="Visibility.cs" />
+    <Compile Include="Window.cs" />
+    <Compile Include="WindowCollection.cs" />
+    <Compile Include="WindowManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.12.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.12.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props'))" />
+  </Target>
+</Project>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props" Condition="Exists('..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4976E8F-C38D-41B4-909C-977174830618}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GHIElectronics.TinyCLR.Gadgeteer</RootNamespace>
+    <AssemblyName>GHIElectronics.TinyCLR.Gadgeteer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Gadgeteer\Modules\Module.cs" />
+    <Compile Include="GHI PINS\EMX.cs" />
+    <Compile Include="GHI PINS\FEZCerb40II.cs" />
+    <Compile Include="GHI PINS\FEZCerberus.cs" />
+    <Compile Include="GHI PINS\FEZCerbuinoBee.cs" />
+    <Compile Include="GHI PINS\FEZCerbuinoNet.cs" />
+    <Compile Include="GHI PINS\FEZCobraII.cs" />
+    <Compile Include="GHI PINS\FEZCobraIII.cs" />
+    <Compile Include="GHI PINS\FEZHydra.cs" />
+    <Compile Include="GHI PINS\FEZLemur.cs" />
+    <Compile Include="GHI PINS\FEZMedusaII.cs" />
+    <Compile Include="GHI PINS\FEZPandaIII.cs" />
+    <Compile Include="GHI PINS\FEZRaptor.cs" />
+    <Compile Include="GHI PINS\FEZReaper.cs" />
+    <Compile Include="GHI PINS\FEZSpider.cs" />
+    <Compile Include="GHI PINS\FEZSpiderII.cs" />
+    <Compile Include="GHI PINS\G120.cs" />
+    <Compile Include="GHI PINS\G120E.cs" />
+    <Compile Include="GHI PINS\G30.cs" />
+    <Compile Include="GHI PINS\G30HDR.cs" />
+    <Compile Include="GHI PINS\G400.cs" />
+    <Compile Include="GHI PINS\G400D.cs" />
+    <Compile Include="GHI PINS\G400S.cs" />
+    <Compile Include="GHI PINS\G80.cs" />
+    <Compile Include="GHI PINS\GadgeteerBoard.cs" />
+    <Compile Include="GHI PINS\GadgeteerSocket.cs" />
+    <Compile Include="GHI PINS\Generic.cs" />
+    <Compile Include="Modules\AccelG248.cs" />
+    <Compile Include="Modules\BreakoutTB10.cs" />
+    <Compile Include="Modules\Button.cs" />
+    <Compile Include="Modules\CellularRadio.cs" />
+    <Compile Include="Modules\CharacterDisplay.cs" />
+    <Compile Include="Modules\Compass.cs" />
+    <Compile Include="Modules\CurrentACS712.cs" />
+    <Compile Include="Modules\DisplayN18.cs" />
+    <Compile Include="Modules\DisplayNHVN.cs" />
+    <Compile Include="Modules\DisplayT35.cs" />
+    <Compile Include="Modules\DisplayT43.cs" />
+    <Compile Include="Modules\GasSense.cs" />
+    <Compile Include="Modules\Gyro.cs" />
+    <Compile Include="Modules\Joystick.cs" />
+    <Compile Include="Modules\Led7C.cs" />
+    <Compile Include="Modules\LEDStrip.cs" />
+    <Compile Include="Modules\LightSense.cs" />
+    <Compile Include="Modules\MaxO.cs" />
+    <Compile Include="Modules\Moisture.cs" />
+    <Compile Include="Modules\MotorDriverL298.cs" />
+    <Compile Include="Modules\PulseCount.cs" />
+    <Compile Include="Modules\PulseOximeter.cs" />
+    <Compile Include="Modules\RelayX1.cs" />
+    <Compile Include="Modules\RFIDReader.cs" />
+    <Compile Include="Modules\RotaryH1.cs" />
+    <Compile Include="Modules\SerialCameraL1.cs" />
+    <Compile Include="Modules\TempHumidSI70.cs" />
+    <Compile Include="Modules\TouchC8.cs" />
+    <Compile Include="Modules\Tunes.cs" />
+    <Compile Include="Modules\VideoOut.cs" />
+    <Compile Include="Modules\XBeeAdapter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Socket\Pin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.12.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.12.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Storage, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Storage.0.12.0\lib\net452\GHIElectronics.TinyCLR.Storage.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GHIElectronics.TinyCLR.Drawing\GHIElectronics.TinyCLR.Drawing.csproj">
+      <Project>{A369BF4B-ABC3-4FDC-9389-D30FBBBD8047}</Project>
+      <Name>GHIElectronics.TinyCLR.Drawing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GHIElectronics.TinyCLR.Core.0.12.0\build\net452\GHIElectronics.TinyCLR.Core.props'))" />
+  </Target>
+</Project>
