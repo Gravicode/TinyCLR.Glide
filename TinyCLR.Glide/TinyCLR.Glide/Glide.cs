@@ -13,6 +13,7 @@ using GHI.Glide.Geom;
 using GHI.Glide.UI;
 using TinyCLR.Glide.Properties;
 using System.Drawing;
+using GHIElectronics.TinyCLR.Devices.Display;
 
 namespace GHI.Glide
 {
@@ -29,15 +30,15 @@ namespace GHI.Glide
         private static Dropdown _dropdown;
         private static List _list;
         private static Size screenSize;
-
+        public static IntPtr Hdc;
         static Glide()
         {
             //SetupGlide(480,272,96,0);
         }
 
-        public static void SetupGlide(int width,int height, int bitsPerPixel, int orientationDeg)
+        public static void SetupGlide(int width,int height, int bitsPerPixel, int orientationDeg, DisplayController displayController)
         {
-            
+            Hdc = displayController.Hdc;
             //HardwareProvider.HwProvider.GetLCDMetrics(out width, out height, out bitsPerPixel, out orientationDeg);
             LCD = new Size() { Width = width, Height = height };
             screen = new System.Drawing.Internal.Bitmap(width, height);
@@ -58,7 +59,8 @@ namespace GHI.Glide
             System.Drawing.Bitmap loading = Resources.GetBitmap(Resources.BitmapResources.loading);
 
             screen.DrawImage((LCD.Width - loading.Width) / 2, (LCD.Height - loading.Height) / 2, loading.GetInternalBitmap(), 0, 0, loading.Width, loading.Height, 0xff);
-            screen.Flush(0,0,width,height);
+            screen.Flush(Hdc);
+            //screen.Flush(0,0,width,height);
         }
         /// <summary>
         /// Returns the screen resolution.
@@ -267,10 +269,14 @@ namespace GHI.Glide
             int offsetY = y - _mainWindow.ListY;
 
             screen.DrawImage(x, offsetY, _mainWindow.Graphics.GetBitmap(), x, y, width, height, 0xff);
-
+            /*
             // Object must be partially visible so flushing doesn't error.
             if (_mainWindow.Rect.Contains(x, offsetY, width, height))
                 Glide.screen.Flush(x, offsetY, width, height);
+            */
+            // Object must be partially visible so flushing doesn't error.
+            if (_mainWindow.Rect.Contains(x, offsetY, width, height))
+                Glide.screen.Flush(Glide.Hdc);
         }
 
         /// <summary>

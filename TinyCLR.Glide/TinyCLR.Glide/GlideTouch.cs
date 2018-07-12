@@ -6,7 +6,7 @@
 
 using System;
 using System.Threading;
-using GHIElectronics.TinyCLR.UI.Input;
+using GHI.Glide.UI;
 //using Microsoft.SPOT;
 //using Microsoft.SPOT.Hardware;
 //using Microsoft.SPOT.Touch;

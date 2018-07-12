@@ -39,7 +39,7 @@ namespace GHI.Glide.UI
             Text = String.Empty;
             TextAlign = System.Drawing.Internal.Bitmap.DT_AlignmentLeft;
             Font = FontManager.GetFont(FontManager.FontType.droid_reg12);
-            FontColor = System.Drawing.Color.Black;
+            FontColor = TinyCLR.Glide.Ext.Colors.Black;
         }
 
         /// <summary>

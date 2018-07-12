@@ -16,9 +16,24 @@ namespace TestApp
     {
         static void Main()
         {
-            TestDisplayNhvn();
+
+            //TestDisplayNhvn();
+            TestGlide();
+            
+            Thread.Sleep(-1);
+        }
+
+        /// <summary>
+        /// Testing method for DisplayNHVN module
+        /// </summary>
+        private static void TestGlide()
+        {
+            var lcd = new DisplayNHVN(GHIElectronics.TinyCLR.Pins.FEZRaptor.I2cBus.Socket13, FEZRaptor.Socket16.Pin9, FEZRaptor.Socket13.Pin3,
+                DisplayNHVN.DisplayTypes.Display7inch);
+
+            Glide.SetupGlide(800, 480, 96, 0,lcd.displayController);
             Window window = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.Window));
-            Glide.SetupGlide(800, 480, 96, 0);
+
             GlideTouch.Initialize();
 
             GHI.Glide.UI.Button btn = (GHI.Glide.UI.Button)window.GetChildByName("btn");
@@ -26,7 +41,10 @@ namespace TestApp
 
             Glide.MainWindow = window;
 
-            Thread.Sleep(-1);
+            lcd.CapacitiveScreenReleased += Lcd_CapacitiveScreenReleased;
+            lcd.CapacitiveScreenPressed += Lcd_CapacitiveScreenPressed;
+
+            //Thread.Sleep(Timeout.Infinite);
         }
 
         private static void OnTap(object sender)
@@ -39,7 +57,7 @@ namespace TestApp
         /// </summary>
         private static void TestDisplayNhvn()
         {
-            var lcd = new DisplayNHVN(FEZRaptor.I2cBus.I2c1, FEZRaptor.Socket16.Pin9, FEZRaptor.Socket13.Pin3,
+            var lcd = new DisplayNHVN(GHIElectronics.TinyCLR.Pins.FEZRaptor.I2cBus.Socket13, FEZRaptor.Socket16.Pin9, FEZRaptor.Socket13.Pin3,
                 DisplayNHVN.DisplayTypes.Display7inch);
             var background = Resources.GetBitmap(Resources.BitmapResources.car);
             var font = Resources.GetFont(Resources.FontResources.NinaB);

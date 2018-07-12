@@ -17,7 +17,7 @@ namespace GHI.Glide.UI
     /// </summary>
     internal class KeyboardText : DisplayObject
     {
-        private Color _color = System.Drawing.Color.White;
+        private Color _color = TinyCLR.Glide.Ext.Colors.White;
         private Font _font = FontManager.GetFont(FontManager.FontType.droid_reg14);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace GHI.Glide.UI
             int x = Parent.X + X;
             int y = Parent.Y + Y;
 
-            Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, x, y, Width, Height, 0, 0, System.Drawing.Color.Black, 0, 0, System.Drawing.Color.Black, 0, 0, Alpha);
+            Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y, Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, Alpha);
 
             int i;
             int line = 0;
@@ -103,7 +103,7 @@ namespace GHI.Glide.UI
 
             // Draw the caret
             Parent.Graphics.DrawLine(
-                System.Drawing.Color.Gray,
+                TinyCLR.Glide.Ext.Colors.Gray,
                 2,
                 x + size.Width + 4,
                 y + (line * _font.Height),

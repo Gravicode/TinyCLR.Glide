@@ -17,8 +17,9 @@ namespace GHI.Glide.Display
     /// </summary>
     public sealed class Graphics
     {
+        
         private Bitmap _bitmap;
-
+       
         /// <summary>
         /// Creates a new Graphics object.
         /// </summary>
@@ -26,7 +27,8 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public Graphics(int width, int height)
         {
-            _bitmap = new Bitmap(width, height);
+            _bitmap = new System.Drawing.Internal.Bitmap(width, height);
+            
         }
 
         /// <summary>
@@ -225,7 +227,8 @@ namespace GHI.Glide.Display
         /// </summary>
         public void Flush()
         {
-            _bitmap.Flush(0,0,_bitmap.Width,_bitmap.Height);
+            _bitmap.Flush(Glide.Hdc);
+            //_bitmap.Flush(0,0,_bitmap.Width,_bitmap.Height);
         }
 
         /// <summary>
@@ -237,7 +240,8 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public void Flush(int x, int y, int width, int height)
         {
-            _bitmap.Flush(x, y, width, height);
+            _bitmap.Flush(Glide.Hdc);
+            //_bitmap.Flush(x, y, width, height);
         }
 
         /// <summary>

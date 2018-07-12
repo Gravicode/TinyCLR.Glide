@@ -247,11 +247,11 @@ namespace GHI.Glide.UI
                 x += Width - ScrollbarWidth;
                 y = Parent.Y + Y;
 
-                Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, x, y, ScrollbarWidth, Height, 0, 0, ScrollbarBackColor, 0, 0, System.Drawing.Color.Black, 0, 0, 255);
+                Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y, ScrollbarWidth, Height, 0, 0, ScrollbarBackColor, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 255);
 
                 // Only show the scrollbar scrubber if it's smaller than the Height
                 if (_scrollbarHeight < Height)
-                    Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, x, y + (_scrollIndex * _scrollbarTick), ScrollbarWidth, _scrollbarHeight, 0, 0, ScrollbarScrubberColor, 0, 0, System.Drawing.Color.Black, 0, 0, 255);
+                    Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y + (_scrollIndex * _scrollbarTick), ScrollbarWidth, _scrollbarHeight, 0, 0, ScrollbarScrubberColor, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 255);
             }
         }
 
@@ -801,17 +801,17 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Headers background color.
         /// </summary>
-        public Color HeadersBackColor = System.Drawing.Color.Black;
+        public Color HeadersBackColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// Headers font color.
         /// </summary>
-        public Color HeadersFontColor = System.Drawing.Color.White;
+        public Color HeadersFontColor = TinyCLR.Glide.Ext.Colors.White;
 
         /// <summary>
         /// Items background color.
         /// </summary>
-        public Color ItemsBackColor = System.Drawing.Color.White;
+        public Color ItemsBackColor = TinyCLR.Glide.Ext.Colors.White;
 
         /// <summary>
         /// Items alternate background color.
@@ -821,7 +821,7 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Items font color.
         /// </summary>
-        public Color ItemsFontColor = System.Drawing.Color.Black;
+        public Color ItemsFontColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// Selected item background color.
@@ -831,12 +831,12 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Selected item font color.
         /// </summary>
-        public Color SelectedItemFontColor = System.Drawing.Color.Black;
+        public Color SelectedItemFontColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// Grid color.
         /// </summary>
-        public Color GridColor = System.Drawing.Color.Gray;
+        public Color GridColor = TinyCLR.Glide.Ext.Colors.Gray;
 
         /// <summary>
         /// Indicates whether the scrollbar is shown.
@@ -856,7 +856,7 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Scrollbar scrubber color.
         /// </summary>
-        public Color ScrollbarScrubberColor = System.Drawing.Color.Black;
+        public Color ScrollbarScrubberColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// The order in which rows are sorted.

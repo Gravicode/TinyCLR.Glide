@@ -114,7 +114,7 @@ namespace GHI.Glide.Display
         public override void Render()
         {
             // HACK: To fix image/color retention.
-            Graphics.DrawRectangle(Rect, System.Drawing.Color.Black, 255);
+            Graphics.DrawRectangle(Rect, TinyCLR.Glide.Ext.Colors.Black, 255);
 
             if (BackImage != null)
                 Graphics.DrawImage(0, 0, BackImage, 0, 0, Width, Height);
@@ -133,7 +133,8 @@ namespace GHI.Glide.Display
         {
             Render();
             Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
-            Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
+            Glide.screen.Flush(Glide.Hdc);
+            //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
         }
 
         /// <summary>
@@ -216,7 +217,8 @@ namespace GHI.Glide.Display
                     ListY = GlideUtils.Math.MinMax(ListY, 0, _listMaxY);
 
                     Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
-                    Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
+                    Glide.screen.Flush(Glide.Hdc);
+                    //Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
                 }
             }
         }

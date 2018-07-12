@@ -7,7 +7,7 @@
 using System.Threading;
 ////using Microsoft.SPOT;
 using GHI.Glide.Geom;
-using GHIElectronics.TinyCLR.UI;
+using GHI.Glide.UI;
 
 namespace GHI.Glide.Display
 {

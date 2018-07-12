@@ -6,3 +6,10 @@ C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHI
 C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.dll
 C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.pdb
 C:\Experiment\tinyclr\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.csprojAssemblyReference.cache
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\bin\Debug\GHIElectronics.TinyCLR.Drawing.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\bin\Debug\GHIElectronics.TinyCLR.Drawing.pdb
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\bin\Debug\mscorlib.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.csproj.CoreCompileInputs.cache
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.csproj.CopyComplete
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Drawing\obj\Debug\GHIElectronics.TinyCLR.Drawing.pdb

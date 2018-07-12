@@ -108,7 +108,8 @@ namespace GHI.Glide
                     {
                         Glide.screen.DrawImage(x1[index], fromY, fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
                         Glide.screen.DrawImage(x2[index], toY, toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
+                        Glide.screen.Flush(Glide.Hdc);
+                        //Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
                         index++;
                     }
                     Glide.MainWindow = toWindow;
@@ -122,7 +123,8 @@ namespace GHI.Glide
                     {
                         Glide.screen.DrawImage(x1[index], fromY, fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
                         Glide.screen.DrawImage(x2[index], toY, toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
+                        Glide.screen.Flush(Glide.Hdc);
+                        //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }
                     Glide.MainWindow = toWindow;
@@ -136,7 +138,8 @@ namespace GHI.Glide
                     {
                         Glide.screen.DrawImage(0, y1[index], fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height,0);
                         Glide.screen.DrawImage(0, y2[index], toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height,0);
-                        Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
+                        Glide.screen.Flush(Glide.Hdc);
+                        //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }
                     Glide.MainWindow = toWindow;
@@ -150,7 +153,8 @@ namespace GHI.Glide
                     {
                         Glide.screen.DrawImage(0, y1[index], fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
                         Glide.screen.DrawImage(0, y2[index], toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
+                        Glide.screen.Flush(Glide.Hdc);
+                        //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }
                     Glide.MainWindow = toWindow;

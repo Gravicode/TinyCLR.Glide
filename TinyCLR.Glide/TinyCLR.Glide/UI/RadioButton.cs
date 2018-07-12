@@ -64,9 +64,9 @@ namespace GHI.Glide.UI
             int yRadius = Height / 3;
 
             if (_checked)
-                Parent.Graphics.DrawEllipse(SelectedOutlineColor, 1, x, y, xRadius, yRadius, SelectedColor, 0, 0, System.Drawing.Color.Black, 0, 0, alpha);
+                Parent.Graphics.DrawEllipse(SelectedOutlineColor, 1, x, y, xRadius, yRadius, SelectedColor, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, alpha);
             else
-                Parent.Graphics.DrawEllipse(OutlineColor, 1, x, y, xRadius, yRadius, Color, 0, 0, System.Drawing.Color.Black, 0, 0, alpha);
+                Parent.Graphics.DrawEllipse(OutlineColor, 1, x, y, xRadius, yRadius, Color, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, alpha);
         }
 
         /// <summary>

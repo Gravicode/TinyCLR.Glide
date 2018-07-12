@@ -36,8 +36,8 @@ namespace GHI.Glide.UI
         public override void Render(Bitmap bitmap)
         {
             Width = Parent.Width;
-            bitmap.GetInternalBitmap().DrawTextInRect(Label, X, Y + (Height - _font.Height) / 2, Width, _font.Height, System.Drawing.Internal.Bitmap.DT_AlignmentCenter, System.Drawing.Color.Black, _font);
-            bitmap.GetInternalBitmap().DrawLine(System.Drawing.Color.LightGray.ToNativeColor(), 1, 0, Y + Height, Width, Y + Height);
+            bitmap.GetInternalBitmap().DrawTextInRect(Label, X, Y + (Height - _font.Height) / 2, Width, _font.Height, System.Drawing.Internal.Bitmap.DT_AlignmentCenter, TinyCLR.Glide.Ext.Colors.Black, _font);
+            bitmap.GetInternalBitmap().DrawLine(TinyCLR.Glide.Ext.Colors.LightGray.ToNativeColor(), 1, 0, Y + Height, Width, Y + Height);
         }
 
         /// <summary>

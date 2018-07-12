@@ -59,6 +59,6 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Message font color.
         /// </summary>
-        public Color MessageFontColor = System.Drawing.Color.Black;
+        public Color MessageFontColor = TinyCLR.Glide.Ext.Colors.Black;
     }
 }

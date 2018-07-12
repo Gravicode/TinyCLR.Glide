@@ -50,7 +50,7 @@ namespace GHI.Glide.UI
             Value = null;
             Text = String.Empty;
             Font = FontManager.GetFont(FontManager.FontType.droid_reg12);
-            FontColor = System.Drawing.Color.Black;
+            FontColor = TinyCLR.Glide.Ext.Colors.Black;
         }
 
         /// <summary>

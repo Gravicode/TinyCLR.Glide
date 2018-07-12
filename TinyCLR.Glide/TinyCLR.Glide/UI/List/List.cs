@@ -105,7 +105,7 @@ namespace GHI.Glide.UI
                 _renderedWithNumChildren = NumChildren;
 
                 _bitmap = new Bitmap(Width, NumChildren * this[0].Height);
-                _bitmap.GetInternalBitmap().DrawRectangle(0, 0, 0, 0, _bitmap.Width, _bitmap.Height, 0, 0, System.Drawing.Color.White.ToNativeColor(), 0, 0, 0, 0, 0, Alpha);
+                _bitmap.GetInternalBitmap().DrawRectangle(0, 0, 0, 0, _bitmap.Width, _bitmap.Height, 0, 0, TinyCLR.Glide.Ext.Colors.White.ToNativeColor(), 0, 0, 0, 0, 0, Alpha);
 
                 for (int i = 0; i < NumChildren; i++)
                     ((ListItem)this[i]).Render(_bitmap);
@@ -113,7 +113,7 @@ namespace GHI.Glide.UI
                 _listMaxY = _bitmap.Height - Height;
             }
 
-            Graphics.DrawRectangle(System.Drawing.Color.Black, 0, 0, 0, Glide.LCD.Width, Glide.LCD.Height, 0, 0, System.Drawing.Color.Black, 0, 0, System.Drawing.Color.Black, 0, 0, 0xff);
+            Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0, Glide.LCD.Width, Glide.LCD.Height, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0xff);
             Graphics.DrawImage(X, Y, _bitmap.GetInternalBitmap(), 0, _listY, Width, Height);
         }
 

@@ -6,3 +6,10 @@ C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\bin\Debug\mscorlib.dll
 C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csproj.CopyComplete
 C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.dll
 C:\Experiment\tinyclr\TinyCLR.Glide\System.XML\obj\Debug\System.XML.pdb
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\bin\Debug\System.XML.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\bin\Debug\System.XML.pdb
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\bin\Debug\mscorlib.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csproj.CoreCompileInputs.cache
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\obj\Debug\System.XML.csproj.CopyComplete
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\obj\Debug\System.XML.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.XML\obj\Debug\System.XML.pdb

@@ -40,7 +40,7 @@ namespace GHI.Glide.UI
 
             // Default
             Bitmap = new Bitmap(Width, Height);
-            Bitmap.DrawRectangle(0, 0, 0, 0, Width, Height, 0, 0, System.Drawing.Color.Fuchsia.ToNativeColor(), 0, 0, System.Drawing.Color.Fuchsia.ToNativeColor(), 0, 0, Alpha);
+            Bitmap.DrawRectangle(0, 0, 0, 0, Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, Alpha);
         }
 
         /// <summary>

@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{8CF6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GHIElectronics.TinyCLR.Gadgeteer", "GHIElectronics.TinyCLR.Gadgeteer\GHIElectronics.TinyCLR.Gadgeteer.csproj", "{F4976E8F-C38D-41B4-909C-977174830618}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Drawing", "System.Drawing\System.Drawing.csproj", "{3523EF64-1985-4121-9F2C-479AC631F4ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F4976E8F-C38D-41B4-909C-977174830618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4976E8F-C38D-41B4-909C-977174830618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4976E8F-C38D-41B4-909C-977174830618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3523EF64-1985-4121-9F2C-479AC631F4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3523EF64-1985-4121-9F2C-479AC631F4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3523EF64-1985-4121-9F2C-479AC631F4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3523EF64-1985-4121-9F2C-479AC631F4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{B775B94B-82FE-4CA0-86BE-3FF533925AAA} = {86CBAE29-B9B1-4CC9-82C0-D497DDA19D4A}
 		{FE940028-3D43-4C1B-A221-A70C48CC6963} = {8CF61AA7-47C7-4476-9F5A-660B935FCCDB}
 		{F4976E8F-C38D-41B4-909C-977174830618} = {86CBAE29-B9B1-4CC9-82C0-D497DDA19D4A}
+		{3523EF64-1985-4121-9F2C-479AC631F4ED} = {86CBAE29-B9B1-4CC9-82C0-D497DDA19D4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CDBAF4DA-7895-46A8-A895-301D4F50E409}

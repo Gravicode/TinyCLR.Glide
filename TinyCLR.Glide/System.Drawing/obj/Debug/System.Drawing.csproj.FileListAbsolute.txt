@@ -1,0 +1,7 @@
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\bin\Debug\System.Drawing.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\bin\Debug\System.Drawing.pdb
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\bin\Debug\mscorlib.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\obj\Debug\System.Drawing.csproj.CoreCompileInputs.cache
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\obj\Debug\System.Drawing.csproj.CopyComplete
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\obj\Debug\System.Drawing.dll
+C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\System.Drawing\obj\Debug\System.Drawing.pdb

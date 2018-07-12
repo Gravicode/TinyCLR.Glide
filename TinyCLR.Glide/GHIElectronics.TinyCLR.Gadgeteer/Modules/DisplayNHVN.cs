@@ -71,13 +71,13 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         public Graphics Screen { set; get; }
-
+        public DisplayController displayController { set; get; }
         /// <summary>Constructs a new instance.</summary>
         /// <param name="DigitalPin9onGSocket">Pin 9 on Socket G.</param>
         public void ConfigureDisplay()
         {
 
-            var displayController = DisplayController.GetDefault(); //Currently returns the hardware LCD controller by default
+            displayController = DisplayController.GetDefault(); //Currently returns the hardware LCD controller by default
 
             if (DisplayType == DisplayTypes.Display7inch)
             {
@@ -218,12 +218,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void SetupCapacitiveTouchController(int portId)
         {
-            var Devices = DeviceInformation.FindAll(I2CBus);
+            var Setting = new I2cConnectionSettings(I2C_ADDRESS)
+            {    // the slave's address
+                BusSpeed = I2cBusSpeed.FastMode
+            };
+            i2cBus = I2cDevice.FromId(I2CBus, Setting);
+
+            //var Devices = DeviceInformation.FindAll(I2CBus);
 
             // Device I2C1 Slave address
-            I2cConnectionSettings Setting = new I2cConnectionSettings(I2C_ADDRESS);
-            Setting.BusSpeed = I2cBusSpeed.FastMode; // 400kHz
-            i2cBus = I2cDevice.FromId(Devices[0].Id, Setting);
+            //I2cConnectionSettings Setting = new I2cConnectionSettings(I2C_ADDRESS);
+            //Setting.BusSpeed = I2cBusSpeed.FastMode; // 400kHz
+            //i2cBus = I2cDevice.FromId(Devices[0].Id, Setting);
             resultBuffer = new byte[1];
             addressBuffer = new byte[1];
             //i2cBus = new I2cDevice(new I2cDevice.Configuration(0x38, 400));

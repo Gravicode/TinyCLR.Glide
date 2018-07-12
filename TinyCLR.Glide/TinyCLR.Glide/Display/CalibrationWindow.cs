@@ -43,7 +43,7 @@ namespace GHI.Glide.Display
             Name = "calibrationWindow";
             Width = Glide.LCD.Width;
             Height = Glide.LCD.Height;
-            BackColor = System.Drawing.Color.White;
+            BackColor = TinyCLR.Glide.Ext.Colors.White;
             Graphics = new Graphics(Width, Height);
 
             int yPos = (Height / 2) - 50;
@@ -72,7 +72,7 @@ namespace GHI.Glide.Display
 
             if (_autoStart)
             {
-                _text1.FontColor = System.Drawing.Color.Black;
+                _text1.FontColor = TinyCLR.Glide.Ext.Colors.Black;
                 _text1.Text = "Touch the crosshair location.";
                 Start();
             }
@@ -80,7 +80,7 @@ namespace GHI.Glide.Display
             {
                 if (GlideTouch.Calibrated)
                 {
-                    _text1.FontColor = System.Drawing.Color.Red;
+                    _text1.FontColor = TinyCLR.Glide.Ext.Colors.Red;
                     _text1.Text = "Touch is already calibrated.";
 
                     _exitBtn.Visible = true;
@@ -88,7 +88,7 @@ namespace GHI.Glide.Display
                 }
                 else
                 {
-                    _text1.FontColor = System.Drawing.Color.Black;
+                    _text1.FontColor = TinyCLR.Glide.Ext.Colors.Black;
                     _text1.Text = "Touch the screen to start.";
 
                     TapEvent += new OnTap(CalibrationWindow_TapEvent);
@@ -116,7 +116,7 @@ namespace GHI.Glide.Display
                         _canvas.Clear();
                         Invalidate();
 
-                        _text1.FontColor = System.Drawing.Color.Blue;
+                        _text1.FontColor = TinyCLR.Glide.Ext.Colors.Blue;
                         _text1.Visible = true;
 
                         Thread.Sleep(250);
@@ -205,11 +205,11 @@ namespace GHI.Glide.Display
         private void DrawCrossHair(int x, int y)
         {
             _canvas.Clear();
-            _canvas.DrawLine(System.Drawing.Color.Red, 1, x - 10, y, x - 2, y);
-            _canvas.DrawLine(System.Drawing.Color.Red, 1, x - 10, y, x - 2, y);
-            _canvas.DrawLine(System.Drawing.Color.Red, 1, x + 10, y, x + 2, y);
-            _canvas.DrawLine(System.Drawing.Color.Red, 1, x, y - 10, x, y - 2);
-            _canvas.DrawLine(System.Drawing.Color.Red, 1, x, y + 10, x, y + 2);
+            _canvas.DrawLine(TinyCLR.Glide.Ext.Colors.Red, 1, x - 10, y, x - 2, y);
+            _canvas.DrawLine(TinyCLR.Glide.Ext.Colors.Red, 1, x - 10, y, x - 2, y);
+            _canvas.DrawLine(TinyCLR.Glide.Ext.Colors.Red, 1, x + 10, y, x + 2, y);
+            _canvas.DrawLine(TinyCLR.Glide.Ext.Colors.Red, 1, x, y - 10, x, y - 2);
+            _canvas.DrawLine(TinyCLR.Glide.Ext.Colors.Red, 1, x, y + 10, x, y + 2);
             Invalidate();
         }
 
@@ -272,7 +272,7 @@ namespace GHI.Glide.Display
 
             if (GlideTouch.Calibrated)
             {
-                _text1.FontColor = System.Drawing.Color.Red;
+                _text1.FontColor = TinyCLR.Glide.Ext.Colors.Red;
                 _text1.Text = "Touch is already calibrated.";
             }
         }

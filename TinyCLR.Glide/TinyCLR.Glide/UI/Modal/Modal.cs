@@ -74,6 +74,6 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Title font color.
         /// </summary>
-        public Color TitleFontColor = System.Drawing.Color.White;
+        public Color TitleFontColor = TinyCLR.Glide.Ext.Colors.White;
     }
 }

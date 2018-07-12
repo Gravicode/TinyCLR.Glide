@@ -41,6 +41,7 @@
     <Compile Include="Display\Window.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Events\Events.cs" />
+    <Compile Include="Ext\Colors.cs" />
     <Compile Include="FontManager.cs" />
     <Compile Include="Geom\Point.cs" />
     <Compile Include="Geom\Rectangle.cs" />
@@ -67,6 +68,17 @@
     <Compile Include="UI\DataGrid\DataGridItemComparer.cs" />
     <Compile Include="UI\Dropdown.cs" />
     <Compile Include="UI\Image.cs" />
+    <Compile Include="UI\Input\BaseEvent.cs" />
+    <Compile Include="UI\Input\CaptureMode.cs" />
+    <Compile Include="UI\Input\GenericEvent.cs" />
+    <Compile Include="UI\Input\HardwareButton.cs" />
+    <Compile Include="UI\Input\TouchEvent.cs" />
+    <Compile Include="UI\Input\TouchEventHandler.cs" />
+    <Compile Include="UI\Input\TouchGesture.cs" />
+    <Compile Include="UI\Input\TouchGestureEventArgs.cs" />
+    <Compile Include="UI\Input\TouchGestureEventHandler.cs" />
+    <Compile Include="UI\Input\TouchInput.cs" />
+    <Compile Include="UI\Input\TouchMessages.cs" />
     <Compile Include="UI\Keyboard\Keyboard.cs" />
     <Compile Include="UI\Keyboard\KeyboardText.cs" />
     <Compile Include="UI\List\IListItem.cs" />
@@ -176,10 +188,6 @@
     <ProjectReference Include="..\GHIElectronics.TinyCLR.Drawing\GHIElectronics.TinyCLR.Drawing.csproj">
       <Project>{A369BF4B-ABC3-4FDC-9389-D30FBBBD8047}</Project>
       <Name>GHIElectronics.TinyCLR.Drawing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GHIElectronics.TinyCLR.UI\GHIElectronics.TinyCLR.UI.csproj">
-      <Project>{C3903B5D-1126-44F5-A2FE-C774D84C5417}</Project>
-      <Name>GHIElectronics.TinyCLR.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\System.XML\System.XML.csproj">
       <Project>{B775B94B-82FE-4CA0-86BE-3FF533925AAA}</Project>

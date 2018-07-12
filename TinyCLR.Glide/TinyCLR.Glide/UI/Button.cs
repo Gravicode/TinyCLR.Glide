@@ -90,13 +90,13 @@ namespace GHI.Glide.UI
             int textY = y + ((Height - textHeight) / 2);
 
             ushort alpha = (Enabled) ? Alpha : (ushort)(Alpha / 2);
-            Color color = (Enabled) ? FontColor : System.Drawing.Color.LightGray;
+            Color color = (Enabled) ? FontColor : TinyCLR.Glide.Ext.Colors.LightGray;
 
             if (TintAmount > 0)
             {
                 Parent.Graphics.DrawLine(TintColor, 1, x + 2, y, (x + Width) - 3, y);
                 Parent.Graphics.DrawLine(TintColor, 1, x + 1, y + 1, (x + Width) - 2, y + 1);
-                Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, x, y + 2, Width, Height - 4, 0, 0, TintColor, 0, 0, System.Drawing.Color.Black, 0, 0, alpha);
+                Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y + 2, Width, Height - 4, 0, 0, TintColor, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, alpha);
                 Parent.Graphics.DrawLine(TintColor, 1, x + 1, (y + Height) - 2, (x + Width) - 2, (y + Height) - 2);
                 Parent.Graphics.DrawLine(TintColor, 1, x + 2, (y + Height) - 1, (x + Width) - 3, (y + Height) - 1);
 
@@ -196,7 +196,7 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Font color.
         /// </summary>
-        public Color FontColor = System.Drawing.Color.Black;
+        public Color FontColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// Disabled font color.
@@ -206,7 +206,7 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Color to tint the button.
         /// </summary>
-        public Color TintColor = System.Drawing.Color.Black;
+        public Color TintColor = TinyCLR.Glide.Ext.Colors.Black;
 
         /// <summary>
         /// Amount of tint to apply.

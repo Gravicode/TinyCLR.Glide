@@ -7,7 +7,7 @@
 using System.Collections;
 ////using Microsoft.SPOT;
 ////using Microsoft.SPOT.Presentation.Media;
-using GHIElectronics.TinyCLR.UI;
+using GHI.Glide.UI;
 
 namespace GHI.Glide.Display
 {

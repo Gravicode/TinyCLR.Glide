@@ -32,7 +32,7 @@ namespace GHI.Glide
             _msgBox = new MessageBox("msgBox", 255, 0, 0, (int)(Glide.LCD.Width * 0.80), 0);
 
             _canvas = new Canvas();
-            _canvas.DrawRectangle(System.Drawing.Color.Black, 0, 0, 0, Glide.LCD.Width, Glide.LCD.Height, 0, 0, System.Drawing.Color.DarkGray, 0, 0, System.Drawing.Color.Black, 0, 0, 125);
+            _canvas.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0, Glide.LCD.Width, Glide.LCD.Height, 0, 0, TinyCLR.Glide.Ext.Colors.DarkGray, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 125);
 
             _result = ModalResult.None;
         }
@@ -292,7 +292,7 @@ namespace GHI.Glide
             bool isTouched = false;
 
             // Create touch inputs that are used as arguments
-            GHIElectronics.TinyCLR.UI.Input.TouchInput[] touches = new GHIElectronics.TinyCLR.UI.Input.TouchInput[] { new GHIElectronics.TinyCLR.UI.Input.TouchInput() };
+            GHI.Glide.UI.TouchInput[] touches = new GHI.Glide.UI.TouchInput[] { new GHI.Glide.UI.TouchInput() };
 
             // Begin touch panel polling
             while (_result == ModalResult.None && !_forceClose)

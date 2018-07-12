@@ -13,7 +13,7 @@ using GHI.Glide.Geom;
 using System.Drawing;
 using TinyCLR.Glide.Properties;
 using System.Diagnostics;
-using GHIElectronics.TinyCLR.UI.Input;
+using GHI.Glide.UI;
 
 namespace GHI.Glide.UI
 {
@@ -139,7 +139,7 @@ namespace GHI.Glide.UI
             int y = Rect.Y;
 
             // HACK: To prevent image/color retention.
-            Parent.Graphics.DrawRectangle(Rect, System.Drawing.Color.Black, 255);
+            Parent.Graphics.DrawRectangle(Rect, TinyCLR.Glide.Ext.Colors.Black, 255);
 
             ((Window)Parent).FillRect(Rect);
 
@@ -484,7 +484,7 @@ namespace GHI.Glide.UI
         /// <summary>
         /// Tick color.
         /// </summary>
-        public Color TickColor = System.Drawing.Color.Black;
+        public Color TickColor = TinyCLR.Glide.Ext.Colors.Black;
     }
 
     /// <summary>

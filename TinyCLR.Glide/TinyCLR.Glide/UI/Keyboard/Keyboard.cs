@@ -87,13 +87,13 @@ namespace GHI.Glide.UI
             int x = Parent.X + X;
             int y = Parent.Y + Y;
 
-            Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, x, y, Glide.LCD.Width, Height, 0, 0, System.Drawing.Color.DarkGray, 0, 0, System.Drawing.Color.Black, 0, 0, 255);
+            Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y, Glide.LCD.Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.DarkGray, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 255);
             Parent.Graphics.DrawImage(_bitmapX, y, BitmapUp[_bitmapIndex].GetInternalBitmap(), 0, 0, Width, Height);
 
             for (int i = 0; i < _keyActive.Length; i++)
             {
                 if (!_keyActive[i])
-                    Parent.Graphics.DrawRectangle(_keyCoords[i], System.Drawing.Color.DarkGray, 200);
+                    Parent.Graphics.DrawRectangle(_keyCoords[i], TinyCLR.Glide.Ext.Colors.DarkGray, 200);
             }
         }
 
@@ -106,7 +106,7 @@ namespace GHI.Glide.UI
             if (index > -1 && index < _keyValues.Length)
             {
                 Geom.Rectangle keyCoord = _keyCoords[index];
-                Parent.Graphics.DrawRectangle(System.Drawing.Color.Black, 0, keyCoord.X, keyCoord.Y, keyCoord.Width, keyCoord.Height, 0, 0, System.Drawing.Color.Black, 0, 0, System.Drawing.Color.Black, 0, 0, 0xff);
+                Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, keyCoord.X, keyCoord.Y, keyCoord.Width, keyCoord.Height, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0xff);
                 Glide.Flush(keyCoord);
             }
             else
