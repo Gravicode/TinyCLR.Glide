@@ -22,7 +22,7 @@ namespace TestApp
             
             Thread.Sleep(-1);
         }
-
+        
         /// <summary>
         /// Testing method for DisplayNHVN module
         /// </summary>
@@ -46,7 +46,7 @@ namespace TestApp
 
             //Thread.Sleep(Timeout.Infinite);
         }
-
+        
         private static void OnTap(object sender)
         {
             Debug.WriteLine("Button tapped.");

@@ -39,5 +39,3 @@ C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\obj\Debug\TestApp.exe
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\obj\Debug\TestApp.pdb
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\bin\Debug\GHIElectronics.TinyCLR.Drawing.dll
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\bin\Debug\GHIElectronics.TinyCLR.Drawing.pdb
-C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\bin\Debug\TinyCLR.Glide.dll
-C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\TestApp\bin\Debug\TinyCLR.Glide.pdb
