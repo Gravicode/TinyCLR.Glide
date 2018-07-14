@@ -50,10 +50,6 @@
     <None Include="Resources\small.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GHIElectronics.TinyCLR.Drawing\GHIElectronics.TinyCLR.Drawing.csproj">
-      <Project>{A369BF4B-ABC3-4FDC-9389-D30FBBBD8047}</Project>
-      <Name>GHIElectronics.TinyCLR.Drawing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GHIElectronics.TinyCLR.Gadgeteer\GHIElectronics.TinyCLR.Gadgeteer.csproj">
       <Project>{F4976E8F-C38D-41B4-909C-977174830618}</Project>
       <Name>GHIElectronics.TinyCLR.Gadgeteer</Name>
@@ -85,6 +81,9 @@
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.12.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.12.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.12.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>

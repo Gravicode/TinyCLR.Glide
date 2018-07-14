@@ -41,6 +41,7 @@
     <Compile Include="Display\Window.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Events\Events.cs" />
+    <Compile Include="Ext\Bitmaps.cs" />
     <Compile Include="Ext\Colors.cs" />
     <Compile Include="FontManager.cs" />
     <Compile Include="Geom\Point.cs" />
@@ -177,6 +178,9 @@
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.12.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.12.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="GHIElectronics.TinyCLR.IO, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.IO.0.12.0\lib\net452\GHIElectronics.TinyCLR.IO.dll</HintPath>
     </Reference>
@@ -185,10 +189,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GHIElectronics.TinyCLR.Drawing\GHIElectronics.TinyCLR.Drawing.csproj">
-      <Project>{A369BF4B-ABC3-4FDC-9389-D30FBBBD8047}</Project>
-      <Name>GHIElectronics.TinyCLR.Drawing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\System.XML\System.XML.csproj">
       <Project>{B775B94B-82FE-4CA0-86BE-3FF533925AAA}</Project>
       <Name>System.XML</Name>

@@ -1,26 +1,19 @@
-﻿namespace System.Xml
+﻿// Decompiled with JetBrains decompiler
+// Type: System.Xml.XmlNameTable
+// Assembly: System.Xml.Legacy, Version=4.3.1.0, Culture=neutral, PublicKeyToken=null
+// MVID: 04A8895C-E271-4174-9A7C-9A44FF541E99
+// Assembly location: C:\Program Files (x86)\Microsoft .NET Micro Framework\v4.3\Assemblies\le\System.Xml.Legacy.dll
+
+namespace System.Xml
 {
-    using System;
-    using System.Runtime.CompilerServices;
+  public abstract class XmlNameTable
+  {
+    public abstract string Get(char[] array, int offset, int length);
 
-    public class XmlNameTable
-    {
-        private XmlNameTable_Entry[] _entries;
-        private int _count;
-        private int _mask = 0x1f;
-        private int _hashCodeRandomizer;
-        private object _tmp;
+    public abstract string Get(string array);
 
-        public XmlNameTable()
-        {
-            this._entries = new XmlNameTable_Entry[this._mask + 1];
-            this._hashCodeRandomizer = new Random().Next();
-        }
+    public abstract string Add(char[] array, int offset, int length);
 
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        public virtual extern string Add(string key);
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        public virtual extern string Get(string value);
-    }
+    public abstract string Add(string array);
+  }
 }
-

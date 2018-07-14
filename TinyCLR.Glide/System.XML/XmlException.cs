@@ -1,70 +1,195 @@
-﻿namespace System.Xml
+﻿// Decompiled with JetBrains decompiler
+// Type: System.Xml.XmlException
+// Assembly: System.Xml.Legacy, Version=4.3.1.0, Culture=neutral, PublicKeyToken=null
+// MVID: 04A8895C-E271-4174-9A7C-9A44FF541E99
+// Assembly location: C:\Program Files (x86)\Microsoft .NET Micro Framework\v4.3\Assemblies\le\System.Xml.Legacy.dll
+
+namespace System.Xml
 {
-    using System;
+  public class XmlException : Exception
+  {
+    private int res;
+    private int lineNumber;
+    private int linePosition;
+    private string sourceUri;
+    private string message;
 
-    public class XmlException : Exception
+    public XmlException()
+      : this((string) null)
     {
-        public XmlException()
-        {
-        }
-
-        public XmlException(string message) : base(message)
-        {
-        }
-
-        public XmlException(XmlExceptionErrorCode errorCode)
-        {
-            base.m_HResult = (int) errorCode;
-        }
-
-        public XmlException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        public XmlExceptionErrorCode ErrorCode
-        {
-            get
-            {
-                return (XmlExceptionErrorCode) base.m_HResult;
-            }
-        }
-
-        public enum XmlExceptionErrorCode
-        {
-            Others = -771751936,
-            UnexpectedEOF = -754974720,
-            BadNameChar = -738197504,
-            UnknownEncoding = -721420288,
-            UnexpectedToken = -704643072,
-            TagMismatch = -687865856,
-            UnexpectedEndTag = -671088640,
-            BadAttributeChar = -654311424,
-            MultipleRoots = -637534208,
-            InvalidRootData = -620756992,
-            XmlDeclNotFirst = -603979776,
-            InvalidXmlDecl = -587202560,
-            InvalidXmlSpace = -570425344,
-            DupAttributeName = -553648128,
-            InvalidCharacter = -536870912,
-            CDATAEndInText = -520093696,
-            InvalidCommentChars = -503316480,
-            LimitExceeded = -486539264,
-            BadOrUnsupportedEntity = -469762048,
-            UndeclaredNamespace = -452984832,
-            InvalidXmlPrefixMapping = -436207616,
-            NamespaceDeclXmlXmlns = -419430400,
-            InvalidPIName = -402653184,
-            DTDIsProhibited = -385875968,
-            EmptyName = -369098752,
-            InvalidNodeType = -352321536,
-            ElementNotFound = -335544320
-        }
-
-        internal enum XmlExceptionErrorCodeInternal
-        {
-            ReturnToManagedCode = -805306368,
-            NeedMoreData = -788529152
-        }
     }
-}
 
+    public XmlException(string message)
+      : this(message, (Exception) null, 0, 0)
+    {
+    }
+
+    public XmlException(string message, Exception innerException)
+      : this(message, innerException, 0, 0)
+    {
+    }
+
+    public XmlException(string message, Exception innerException, int lineNumber, int linePosition)
+      : this(message, innerException, lineNumber, linePosition, (string) null)
+    {
+    }
+
+    internal XmlException(string message, Exception innerException, int lineNumber, int linePosition, string sourceUri)
+      : this(message == null ? 1 : 0, new string[1]
+      {
+        message
+      }, innerException, lineNumber, linePosition, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string[] args)
+      : this(res, args, (Exception) null, 0, 0, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string[] args, string sourceUri)
+      : this(res, args, (Exception) null, 0, 0, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string arg)
+      : this(res, new string[1]{ arg }, (Exception) null, 0, 0, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string arg, string sourceUri)
+      : this(res, new string[1]{ arg }, (Exception) null, 0, 0, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string arg, IXmlLineInfo lineInfo)
+      : this(res, new string[1]{ arg }, lineInfo, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string arg, Exception innerException, IXmlLineInfo lineInfo)
+      : this(res, new string[1]{ arg }, innerException, lineInfo == null ? 0 : lineInfo.LineNumber, lineInfo == null ? 0 : lineInfo.LinePosition, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string arg, IXmlLineInfo lineInfo, string sourceUri)
+      : this(res, new string[1]{ arg }, lineInfo, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string[] args, IXmlLineInfo lineInfo)
+      : this(res, args, lineInfo, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string[] args, IXmlLineInfo lineInfo, string sourceUri)
+      : this(res, args, (Exception) null, lineInfo == null ? 0 : lineInfo.LineNumber, lineInfo == null ? 0 : lineInfo.LinePosition, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, int lineNumber, int linePosition)
+      : this(res, (string[]) null, (Exception) null, lineNumber, linePosition)
+    {
+    }
+
+    internal XmlException(int res, string arg, int lineNumber, int linePosition)
+      : this(res, new string[1]{ arg }, (Exception) null, lineNumber, linePosition, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string arg, int lineNumber, int linePosition, string sourceUri)
+      : this(res, new string[1]{ arg }, (Exception) null, lineNumber, linePosition, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string[] args, int lineNumber, int linePosition)
+      : this(res, args, (Exception) null, lineNumber, linePosition, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string[] args, int lineNumber, int linePosition, string sourceUri)
+      : this(res, args, (Exception) null, lineNumber, linePosition, sourceUri)
+    {
+    }
+
+    internal XmlException(int res, string[] args, Exception innerException, int lineNumber, int linePosition)
+      : this(res, args, innerException, lineNumber, linePosition, (string) null)
+    {
+    }
+
+    internal XmlException(int res, string[] args, Exception innerException, int lineNumber, int linePosition, string sourceUri)
+      : base(XmlException.CreateMessage(res, args, lineNumber, linePosition), innerException)
+    {
+      this.res = res;
+      this.sourceUri = sourceUri;
+      this.lineNumber = lineNumber;
+      this.linePosition = linePosition;
+    }
+
+    private static string CreateMessage(int res, string[] args, int lineNumber, int linePosition)
+    {
+      string str = Res.GetString(res, (object[]) args);
+      if (lineNumber != 0)
+      {
+        string[] strArray = new string[2]
+        {
+          lineNumber.ToString(),
+          linePosition.ToString()
+        };
+        str = str + " " + Res.GetString(14, (object[]) strArray);
+      }
+      return str;
+    }
+
+    internal static string[] BuildCharExceptionStr(char ch)
+    {
+      return new string[2]
+      {
+        ch != char.MinValue ? ch.ToString() : ".",
+        Utility.ToHexDigits((uint) ch)
+      };
+    }
+
+    public int LineNumber
+    {
+      get
+      {
+        return this.lineNumber;
+      }
+    }
+
+    public int LinePosition
+    {
+      get
+      {
+        return this.linePosition;
+      }
+    }
+
+    public string SourceUri
+    {
+      get
+      {
+        return this.sourceUri;
+      }
+    }
+
+    public override string Message
+    {
+      get
+      {
+        if (this.message != null)
+          return this.message;
+        return base.Message;
+      }
+    }
+
+    internal int ResId
+    {
+      get
+      {
+        return this.res;
+      }
+    }
+  }
+}

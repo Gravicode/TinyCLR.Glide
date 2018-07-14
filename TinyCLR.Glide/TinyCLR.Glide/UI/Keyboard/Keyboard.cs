@@ -88,7 +88,7 @@ namespace GHI.Glide.UI
             int y = Parent.Y + Y;
 
             Parent.Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, x, y, Glide.LCD.Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.DarkGray, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 255);
-            Parent.Graphics.DrawImage(_bitmapX, y, BitmapUp[_bitmapIndex].GetInternalBitmap(), 0, 0, Width, Height);
+            Parent.Graphics.DrawImage(_bitmapX, y, BitmapUp[_bitmapIndex], 0, 0, Width, Height);
 
             for (int i = 0; i < _keyActive.Length; i++)
             {

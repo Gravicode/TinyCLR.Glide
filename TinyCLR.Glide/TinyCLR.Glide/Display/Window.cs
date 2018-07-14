@@ -6,7 +6,7 @@
 
 ////using Microsoft.SPOT;
 ////using Microsoft.SPOT.Presentation.Media;
-using System.Drawing.Internal;
+using System.Drawing;
 using Color = System.Drawing.Color;
 
 namespace GHI.Glide.Display
@@ -132,8 +132,10 @@ namespace GHI.Glide.Display
         public override void Invalidate()
         {
             Render();
-            Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
-            Glide.screen.Flush(Glide.Hdc);
+            Glide.screen.DrawImage(Graphics.GetBitmap(), new System.Drawing.Rectangle(X, Y, Width, Height), new System.Drawing.Rectangle(0, ListY, Width, Height), GraphicsUnit.Pixel);
+
+            //Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
+            Glide.screen.Flush();
             //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
         }
 
@@ -216,8 +218,9 @@ namespace GHI.Glide.Display
 
                     ListY = GlideUtils.Math.MinMax(ListY, 0, _listMaxY);
 
-                    Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
-                    Glide.screen.Flush(Glide.Hdc);
+                    Glide.screen.DrawImage(Graphics.GetBitmap(),new System.Drawing.Rectangle( X, Y, Width,Height),new System.Drawing.Rectangle( 0, ListY, Width, Height),GraphicsUnit.Pixel);
+                    //Glide.screen.DrawImage(X, Y, Graphics.GetBitmap(), 0, ListY, Width, Height, 0xff);
+                    Glide.screen.Flush();
                     //Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
                 }
             }

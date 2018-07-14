@@ -9,6 +9,8 @@ using System.Collections;
 //using Microsoft.SPOT;
 //using Microsoft.SPOT.Presentation.Media;
 using System.Drawing;
+using TinyCLR.Glide.Ext;
+
 namespace GHI.Glide
 {
     /// <summary>
@@ -29,7 +31,9 @@ namespace GHI.Glide
             public static System.Drawing.Color ToColor(string hexCode)
             {
                 int c = System.Convert.ToInt32(hexCode, 16);
-                return new System.Drawing.Color((c >> 16) | (c & 0x00FF00) | ((c & 0x0000FF) << 16));
+                var col= System.Drawing.Color.FromArgb((c >> 16) | (c & 0x00FF00) | ((c & 0x0000FF) << 16));
+                col = System.Drawing.Color.FromArgb(byte.MaxValue,col.R,col.G,col.B);
+                return col;
             }
 
             /// <summary>
@@ -53,13 +57,13 @@ namespace GHI.Glide
                 switch (alignment.ToUpper())
                 {
                     case "LEFT":
-                        return System.Drawing.Internal.Bitmap.DT_AlignmentLeft;
+                        return Bitmaps.DT_AlignmentLeft;
                     case "CENTER":
-                        return System.Drawing.Internal.Bitmap.DT_AlignmentCenter;
+                        return Bitmaps.DT_AlignmentCenter;
                     case "RIGHT":
-                        return System.Drawing.Internal.Bitmap.DT_AlignmentRight;
+                        return Bitmaps.DT_AlignmentRight;
                     default:
-                        return System.Drawing.Internal.Bitmap.DT_AlignmentRight;
+                        return Bitmaps.DT_AlignmentRight;
                 }
             }
 

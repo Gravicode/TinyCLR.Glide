@@ -47,9 +47,9 @@ namespace GHI.Glide.UI
             int y = Parent.Y + Y;
 
             if (_checked)
-                Parent.Graphics.DrawImage(x, y, _CheckBox_On.GetInternalBitmap(), 0, 0, Width, Height, Alpha);
+                Parent.Graphics.DrawImage(x, y, _CheckBox_On, 0, 0, Width, Height, Alpha);
             else
-                Parent.Graphics.DrawImage(x, y, _CheckBox_Off.GetInternalBitmap(), 0, 0, Width, Height, Alpha);
+                Parent.Graphics.DrawImage(x, y, _CheckBox_Off, 0, 0, Width, Height, Alpha);
         }
 
         /// <summary>

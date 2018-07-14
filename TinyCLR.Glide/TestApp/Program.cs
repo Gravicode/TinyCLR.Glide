@@ -16,10 +16,14 @@ namespace TestApp
     {
         static void Main()
         {
-
-            //TestDisplayNhvn();
-            TestGlide();
-            
+            try
+            {
+                //TestDisplayNhvn();
+                TestGlide();
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             Thread.Sleep(-1);
         }
         
@@ -32,12 +36,23 @@ namespace TestApp
                 DisplayNHVN.DisplayTypes.Display7inch);
 
             Glide.SetupGlide(800, 480, 96, 0,lcd.displayController);
-            Window window = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.Window));
+            string GlideXML = @"<Glide Version=""1.0.7""><Window Name=""instance115"" Width=""800"" Height=""480"" BackColor=""dce3e7""><Button Name=""btn"" X=""40"" Y=""60"" Width=""120"" Height=""40"" Alpha=""255"" Text=""Click Me"" Font=""4"" FontColor=""000000"" DisabledFontColor=""808080"" TintColor=""000000"" TintAmount=""0""/><TextBlock Name=""TxtTest"" X=""42"" Y=""120"" Width=""650"" Height=""32"" Alpha=""255"" Text=""TextBlock"" TextAlign=""Left"" TextVerticalAlign=""Top"" Font=""6"" FontColor=""0"" BackColor=""000000"" ShowBackColor=""False""/></Window></Glide>";
+           
+            //Resources.GetString(Resources.StringResources.Window)
+            Window window = GlideLoader.LoadWindow(GlideXML);
 
             GlideTouch.Initialize();
 
             GHI.Glide.UI.Button btn = (GHI.Glide.UI.Button)window.GetChildByName("btn");
-            btn.TapEvent += OnTap;
+            GHI.Glide.UI.TextBlock txt = (GHI.Glide.UI.TextBlock)window.GetChildByName("TxtTest");
+            btn.TapEvent += (object sender)=>
+            {
+                txt.Text = "Welcome to Glide for TinyCLR - Cheers from Mif ;)";
+                Debug.WriteLine("Button tapped.");
+                
+                window.Invalidate();
+                txt.Invalidate();
+            };
 
             Glide.MainWindow = window;
 
@@ -47,10 +62,7 @@ namespace TestApp
             //Thread.Sleep(Timeout.Infinite);
         }
         
-        private static void OnTap(object sender)
-        {
-            Debug.WriteLine("Button tapped.");
-        }
+    
 
         /// <summary>
         /// Testing method for DisplayNHVN module

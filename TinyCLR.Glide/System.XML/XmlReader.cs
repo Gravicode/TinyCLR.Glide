@@ -1,745 +1,744 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: System.Xml.XmlReader
-// Assembly: System.Xml, Version=4.3.1.0, Culture=neutral, PublicKeyToken=null
-// MVID: 333D9AE1-C644-4FBA-B9E6-1778C5F29BED
-// Assembly location: C:\Program Files (x86)\Microsoft .NET Micro Framework\v4.3\Assemblies\le\System.Xml.dll
+// Assembly: System.Xml.Legacy, Version=4.3.1.0, Culture=neutral, PublicKeyToken=null
+// MVID: 04A8895C-E271-4174-9A7C-9A44FF541E99
+// Assembly location: C:\Program Files (x86)\Microsoft .NET Micro Framework\v4.3\Assemblies\le\System.Xml.Legacy.dll
 
-using System.Collections;
 using System.IO;
-using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace System.Xml
 {
-    public class XmlReader : IDisposable
+  public abstract class XmlReader : IDisposable
+  {
+    private static uint IsTextualNodeBitmap = 24600;
+    private static uint CanReadContentAsBitmap = 123324;
+    private static uint HasValueBitmap = 157084;
+    internal const int DefaultBufferSize = 4096;
+    internal const int BiggerBufferSize = 8192;
+    internal const int MaxStreamLengthForDefaultBufferSize = 65536;
+
+    public virtual XmlReaderSettings Settings
     {
-        private static readonly string Xml = "xml";
-        private static readonly string Xmlns = "xmlns";
-        private static readonly string XmlNamespace = "http://www.w3.org/XML/1998/namespace";
-        private static readonly string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
-        private const int BufferSize = 1024;
-        private const uint HasValueBitmap = 508;
-        private const uint IsTextualNodeBitmap = 204;
-        private byte[] _buffer;
-        private int _offset;
-        private int _length;
-        private Stack _xmlNodes;
-        private Stack _namespaces;
-        private Stack _xmlSpaces;
-        private Stack _xmlLangs;
-        private XmlNodeType _nodeType;
-        private string _value;
-        private bool _isEmptyElement;
-        private ArrayList _attributes;
-        private XmlNameTable _nameTable;
-        private object _state;
-        private bool _isDone;
-        private int _currentAttribute;
-        private Stream _stream;
-        private ReadState _readState;
+      get
+      {
+        return (XmlReaderSettings) null;
+      }
+    }
 
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern void Initialize(uint settings);
+    public abstract XmlNodeType NodeType { get; }
 
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern int ReadInternal(uint options);
+    public virtual string Name
+    {
+      get
+      {
+        if (this.Prefix.Length == 0)
+          return this.LocalName;
+        return this.NameTable.Add(this.Prefix + ":" + this.LocalName);
+      }
+    }
 
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool StringRefEquals(string str1, string str2);
+    public abstract string LocalName { get; }
 
-        public virtual XmlNodeType NodeType
+    public abstract string NamespaceURI { get; }
+
+    public abstract string Prefix { get; }
+
+    public abstract bool HasValue { get; }
+
+    public abstract string Value { get; }
+
+    public abstract int Depth { get; }
+
+    public abstract string BaseURI { get; }
+
+    public abstract bool IsEmptyElement { get; }
+
+    public virtual bool IsDefault
+    {
+      get
+      {
+        return false;
+      }
+    }
+
+    public virtual char QuoteChar
+    {
+      get
+      {
+        return '"';
+      }
+    }
+
+    public virtual XmlSpace XmlSpace
+    {
+      get
+      {
+        return XmlSpace.None;
+      }
+    }
+
+    public virtual string XmlLang
+    {
+      get
+      {
+        return "";
+      }
+    }
+
+    public virtual Type ValueType
+    {
+      get
+      {
+        return typeof (string);
+      }
+    }
+
+    public virtual object ReadContentAsObject()
+    {
+      if (!XmlReader.CanReadContentAs(this.NodeType))
+        throw this.CreateReadContentAsException(nameof (ReadContentAsObject));
+      return (object) this.InternalReadContentAsString();
+    }
+
+    public abstract int AttributeCount { get; }
+
+    public abstract string GetAttribute(string name);
+
+    public abstract string GetAttribute(string name, string namespaceURI);
+
+    public abstract string GetAttribute(int i);
+
+    public virtual string this[int i]
+    {
+      get
+      {
+        return this.GetAttribute(i);
+      }
+    }
+
+    public virtual string this[string name]
+    {
+      get
+      {
+        return this.GetAttribute(name);
+      }
+    }
+
+    public virtual string this[string name, string namespaceURI]
+    {
+      get
+      {
+        return this.GetAttribute(name, namespaceURI);
+      }
+    }
+
+    public abstract bool MoveToAttribute(string name);
+
+    public abstract bool MoveToAttribute(string name, string ns);
+
+    public virtual void MoveToAttribute(int i)
+    {
+      if (i < 0 || i >= this.AttributeCount)
+        throw new ArgumentOutOfRangeException(nameof (i));
+      this.MoveToElement();
+      this.MoveToFirstAttribute();
+      for (int index = 0; index < i; ++index)
+        this.MoveToNextAttribute();
+    }
+
+    public abstract bool MoveToFirstAttribute();
+
+    public abstract bool MoveToNextAttribute();
+
+    public abstract bool MoveToElement();
+
+    public abstract bool ReadAttributeValue();
+
+    public abstract bool Read();
+
+    public abstract bool EOF { get; }
+
+    public abstract void Close();
+
+    public abstract ReadState ReadState { get; }
+
+    public virtual void Skip()
+    {
+      this.SkipSubtree();
+    }
+
+    public abstract XmlNameTable NameTable { get; }
+
+    public abstract string LookupNamespace(string prefix);
+
+    public virtual bool CanResolveEntity
+    {
+      get
+      {
+        return false;
+      }
+    }
+
+    public abstract void ResolveEntity();
+
+    public virtual bool CanReadBinaryContent
+    {
+      get
+      {
+        return false;
+      }
+    }
+
+    public virtual int ReadContentAsBase64(byte[] buffer, int index, int count)
+    {
+      throw new NotSupportedException(Res.GetString(48, nameof (ReadContentAsBase64)));
+    }
+
+    public virtual int ReadElementContentAsBase64(byte[] buffer, int index, int count)
+    {
+      throw new NotSupportedException(Res.GetString(48, nameof (ReadElementContentAsBase64)));
+    }
+
+    public virtual int ReadContentAsBinHex(byte[] buffer, int index, int count)
+    {
+      throw new NotSupportedException(Res.GetString(48, nameof (ReadContentAsBinHex)));
+    }
+
+    public virtual int ReadElementContentAsBinHex(byte[] buffer, int index, int count)
+    {
+      throw new NotSupportedException(Res.GetString(48, nameof (ReadElementContentAsBinHex)));
+    }
+
+    public virtual bool CanReadValueChunk
+    {
+      get
+      {
+        return false;
+      }
+    }
+
+    public virtual int ReadValueChunk(char[] buffer, int index, int count)
+    {
+      throw new NotSupportedException(Res.GetString(49));
+    }
+
+    public virtual string ReadString()
+    {
+      if (this.ReadState != ReadState.Interactive)
+        return "";
+      this.MoveToElement();
+      if (this.NodeType == XmlNodeType.Element)
+      {
+        if (this.IsEmptyElement)
+          return "";
+        if (!this.Read())
+          throw new InvalidOperationException(Res.GetString(2));
+        if (this.NodeType == XmlNodeType.EndElement)
+          return "";
+      }
+      string str = "";
+      while (XmlReader.IsTextualNode(this.NodeType))
+      {
+        str += this.Value;
+        if (!this.Read())
+          throw new InvalidOperationException(Res.GetString(2));
+      }
+      return str;
+    }
+
+    public virtual XmlNodeType MoveToContent()
+    {
+      do
+      {
+        switch (this.NodeType)
         {
-            get
+          case XmlNodeType.Element:
+          case XmlNodeType.Text:
+          case XmlNodeType.CDATA:
+          case XmlNodeType.EntityReference:
+          case XmlNodeType.EndElement:
+          case XmlNodeType.EndEntity:
+            return this.NodeType;
+          case XmlNodeType.Attribute:
+            this.MoveToElement();
+            goto case XmlNodeType.Element;
+          default:
+            continue;
+        }
+      }
+      while (this.Read());
+      return this.NodeType;
+    }
+
+    public virtual void ReadStartElement()
+    {
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      this.Read();
+    }
+
+    public virtual void ReadStartElement(string name)
+    {
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (!(this.Name == name))
+        throw new XmlException(33, name, this as IXmlLineInfo);
+      this.Read();
+    }
+
+    public virtual void ReadStartElement(string localname, string ns)
+    {
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (this.LocalName == localname && this.NamespaceURI == ns)
+        this.Read();
+      else
+        throw new XmlException(34, new string[2]
+        {
+          localname,
+          ns
+        }, this as IXmlLineInfo);
+    }
+
+    public virtual string ReadElementString()
+    {
+      string str = "";
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (!this.IsEmptyElement)
+      {
+        this.Read();
+        str = this.ReadString();
+        if (this.NodeType != XmlNodeType.EndElement)
+          throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+        this.Read();
+      }
+      else
+        this.Read();
+      return str;
+    }
+
+    public virtual string ReadElementString(string name)
+    {
+      string str = "";
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (this.Name != name)
+        throw new XmlException(33, name, this as IXmlLineInfo);
+      if (!this.IsEmptyElement)
+      {
+        str = this.ReadString();
+        if (this.NodeType != XmlNodeType.EndElement)
+          throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+        this.Read();
+      }
+      else
+        this.Read();
+      return str;
+    }
+
+    public virtual string ReadElementString(string localname, string ns)
+    {
+      string str = "";
+      if (this.MoveToContent() != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (this.LocalName != localname || this.NamespaceURI != ns)
+        throw new XmlException(34, new string[2]
+        {
+          localname,
+          ns
+        }, this as IXmlLineInfo);
+      if (!this.IsEmptyElement)
+      {
+        str = this.ReadString();
+        if (this.NodeType != XmlNodeType.EndElement)
+          throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+        this.Read();
+      }
+      else
+        this.Read();
+      return str;
+    }
+
+    public virtual void ReadEndElement()
+    {
+      if (this.MoveToContent() != XmlNodeType.EndElement)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      this.Read();
+    }
+
+    public virtual bool IsStartElement()
+    {
+      return this.MoveToContent() == XmlNodeType.Element;
+    }
+
+    public virtual bool IsStartElement(string name)
+    {
+      if (this.MoveToContent() == XmlNodeType.Element)
+        return this.Name == name;
+      return false;
+    }
+
+    public virtual bool IsStartElement(string localname, string ns)
+    {
+      if (this.MoveToContent() == XmlNodeType.Element && this.LocalName == localname)
+        return this.NamespaceURI == ns;
+      return false;
+    }
+
+    public virtual bool ReadToFollowing(string name)
+    {
+      if (name == null || name.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(name, nameof (name));
+      name = this.NameTable.Add(name);
+      while (this.Read())
+      {
+        if (this.NodeType == XmlNodeType.Element && Ref.Equal(name, this.Name))
+          return true;
+      }
+      return false;
+    }
+
+    public virtual bool ReadToFollowing(string localName, string namespaceURI)
+    {
+      if (localName == null || localName.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(localName, nameof (localName));
+      if (namespaceURI == null)
+        throw new ArgumentNullException(nameof (namespaceURI));
+      localName = this.NameTable.Add(localName);
+      namespaceURI = this.NameTable.Add(namespaceURI);
+      while (this.Read())
+      {
+        if (this.NodeType == XmlNodeType.Element && Ref.Equal(localName, this.LocalName) && Ref.Equal(namespaceURI, this.NamespaceURI))
+          return true;
+      }
+      return false;
+    }
+
+    public virtual bool ReadToDescendant(string name)
+    {
+      if (name == null || name.Length == 0)
+        throw new ArgumentException(name, nameof (name));
+      int depth = this.Depth;
+      if (this.NodeType != XmlNodeType.Element)
+      {
+        if (this.ReadState != ReadState.Initial)
+          return false;
+        --depth;
+      }
+      else if (this.IsEmptyElement)
+        return false;
+      name = this.NameTable.Add(name);
+      while (this.Read() && this.Depth > depth)
+      {
+        if (this.NodeType == XmlNodeType.Element && Ref.Equal(name, this.Name))
+          return true;
+      }
+      return false;
+    }
+
+    public virtual bool ReadToDescendant(string localName, string namespaceURI)
+    {
+      if (localName == null || localName.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(localName, nameof (localName));
+      if (namespaceURI == null)
+        throw new ArgumentNullException(nameof (namespaceURI));
+      int depth = this.Depth;
+      if (this.NodeType != XmlNodeType.Element)
+      {
+        if (this.ReadState != ReadState.Initial)
+          return false;
+        --depth;
+      }
+      else if (this.IsEmptyElement)
+        return false;
+      localName = this.NameTable.Add(localName);
+      namespaceURI = this.NameTable.Add(namespaceURI);
+      while (this.Read() && this.Depth > depth)
+      {
+        if (this.NodeType == XmlNodeType.Element && Ref.Equal(localName, this.LocalName) && Ref.Equal(namespaceURI, this.NamespaceURI))
+          return true;
+      }
+      return false;
+    }
+
+    public virtual bool ReadToNextSibling(string name)
+    {
+      if (name == null || name.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(name, nameof (name));
+      name = this.NameTable.Add(name);
+      XmlNodeType nodeType;
+      do
+      {
+        this.SkipSubtree();
+        nodeType = this.NodeType;
+        if (nodeType == XmlNodeType.Element && Ref.Equal(name, this.Name))
+          return true;
+      }
+      while (nodeType != XmlNodeType.EndElement && !this.EOF);
+      return false;
+    }
+
+    public virtual bool ReadToNextSibling(string localName, string namespaceURI)
+    {
+      if (localName == null || localName.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(localName, nameof (localName));
+      if (namespaceURI == null)
+        throw new ArgumentNullException(nameof (namespaceURI));
+      localName = this.NameTable.Add(localName);
+      namespaceURI = this.NameTable.Add(namespaceURI);
+      XmlNodeType nodeType;
+      do
+      {
+        this.SkipSubtree();
+        nodeType = this.NodeType;
+        if (nodeType == XmlNodeType.Element && Ref.Equal(localName, this.LocalName) && Ref.Equal(namespaceURI, this.NamespaceURI))
+          return true;
+      }
+      while (nodeType != XmlNodeType.EndElement && !this.EOF);
+      return false;
+    }
+
+    public static bool IsName(string str)
+    {
+      return XmlCharType.Instance.IsName(str);
+    }
+
+    public static bool IsNameToken(string str)
+    {
+      return XmlCharType.Instance.IsNmToken(str);
+    }
+
+    public virtual bool HasAttributes
+    {
+      get
+      {
+        return this.AttributeCount > 0;
+      }
+    }
+
+    public virtual void Dispose()
+    {
+      if (this.ReadState == ReadState.Closed)
+        return;
+      this.Close();
+    }
+
+    internal static bool IsTextualNode(XmlNodeType nodeType)
+    {
+      return 0L != ((long) XmlReader.IsTextualNodeBitmap & (long) (1 << (int) (nodeType & (XmlNodeType.EndElement | XmlNodeType.EndEntity))));
+    }
+
+    internal static bool CanReadContentAs(XmlNodeType nodeType)
+    {
+      return 0L != ((long) XmlReader.CanReadContentAsBitmap & (long) (1 << (int) (nodeType & (XmlNodeType.EndElement | XmlNodeType.EndEntity))));
+    }
+
+    internal static bool HasValueInternal(XmlNodeType nodeType)
+    {
+      return 0L != ((long) XmlReader.HasValueBitmap & (long) (1 << (int) (nodeType & (XmlNodeType.EndElement | XmlNodeType.EndEntity))));
+    }
+
+    private void SkipSubtree()
+    {
+      if (this.ReadState != ReadState.Interactive)
+        return;
+      this.MoveToElement();
+      if (this.NodeType == XmlNodeType.Element && !this.IsEmptyElement)
+      {
+        int depth = this.Depth;
+        do
+          ;
+        while (this.Read() && depth < this.Depth);
+        if (this.NodeType != XmlNodeType.EndElement)
+          return;
+        this.Read();
+      }
+      else
+        this.Read();
+    }
+
+    internal void CheckElement(string localName, string namespaceURI)
+    {
+      if (localName == null || localName.Length == 0)
+        throw XmlExceptionHelper.CreateInvalidNameArgumentException(localName, nameof (localName));
+      if (namespaceURI == null)
+        throw new ArgumentNullException(nameof (namespaceURI));
+      if (this.NodeType != XmlNodeType.Element)
+        throw new XmlException(27, this.NodeType.ToString(), this as IXmlLineInfo);
+      if (this.LocalName != localName || this.NamespaceURI != namespaceURI)
+        throw new XmlException(34, new string[2]
+        {
+          localName,
+          namespaceURI
+        }, this as IXmlLineInfo);
+    }
+
+    internal Exception CreateReadContentAsException(string methodName)
+    {
+      return XmlReader.CreateReadContentAsException(methodName, this.NodeType);
+    }
+
+    internal Exception CreateReadElementContentAsException(string methodName)
+    {
+      return XmlReader.CreateReadElementContentAsException(methodName, this.NodeType);
+    }
+
+    internal static Exception CreateReadContentAsException(string methodName, XmlNodeType nodeType)
+    {
+      return (Exception) new InvalidOperationException(Res.GetString(50, (object[]) new string[2]
+      {
+        methodName,
+        nodeType.ToString()
+      }));
+    }
+
+    internal static Exception CreateReadElementContentAsException(string methodName, XmlNodeType nodeType)
+    {
+      return (Exception) new InvalidOperationException(Res.GetString(51, (object[]) new string[2]
+      {
+        methodName,
+        nodeType.ToString()
+      }));
+    }
+
+    internal string InternalReadContentAsString()
+    {
+      string str = "";
+      BufferBuilder bufferBuilder = (BufferBuilder) null;
+      do
+      {
+        switch (this.NodeType)
+        {
+          case XmlNodeType.Attribute:
+            return this.Value;
+          case XmlNodeType.Text:
+          case XmlNodeType.CDATA:
+          case XmlNodeType.Whitespace:
+          case XmlNodeType.SignificantWhitespace:
+            if (str.Length == 0)
             {
-                if (this._currentAttribute < 0)
-                    return this._nodeType;
-                return XmlNodeType.Attribute;
-            }
-        }
-
-        public virtual string Name
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return ((XmlReader_XmlAttribute)this._attributes[this._currentAttribute]).Name;
-                return ((XmlReader_XmlNode)this._xmlNodes.Peek()).Name;
-            }
-        }
-
-        public virtual string LocalName
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return ((XmlReader_XmlAttribute)this._attributes[this._currentAttribute]).LocalName;
-                return ((XmlReader_XmlNode)this._xmlNodes.Peek()).LocalName;
-            }
-        }
-
-        public virtual string NamespaceURI
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return ((XmlReader_XmlAttribute)this._attributes[this._currentAttribute]).NamespaceURI;
-                return ((XmlReader_XmlNode)this._xmlNodes.Peek()).NamespaceURI;
-            }
-        }
-
-        public virtual string Prefix
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return ((XmlReader_XmlAttribute)this._attributes[this._currentAttribute]).Prefix;
-                return ((XmlReader_XmlNode)this._xmlNodes.Peek()).Prefix;
-            }
-        }
-
-        public virtual bool HasValue
-        {
-            get
-            {
-                return 0L != (508L & (long)(1 << (int)(this.NodeType & (XmlNodeType)31)));
-            }
-        }
-
-        public virtual string Value
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return ((XmlReader_XmlAttribute)this._attributes[this._currentAttribute]).Value;
-                return this._value;
-            }
-        }
-
-        public virtual int Depth
-        {
-            get
-            {
-                if (this._currentAttribute >= 0)
-                    return this._xmlNodes.Count;
-                return this._xmlNodes.Count - 1;
-            }
-        }
-
-        public virtual bool IsEmptyElement
-        {
-            get
-            {
-                if (this._currentAttribute != -1)
-                    return false;
-                return this._isEmptyElement;
-            }
-        }
-
-        public virtual XmlSpace XmlSpace
-        {
-            get
-            {
-                return (XmlSpace)this._xmlSpaces.Peek();
-            }
-        }
-
-        public virtual string XmlLang
-        {
-            get
-            {
-                return (string)this._xmlLangs.Peek();
-            }
-        }
-
-        public virtual int AttributeCount
-        {
-            get
-            {
-                return this._attributes.Count;
-            }
-        }
-
-        public virtual string GetAttribute(string name)
-        {
-            int attribute = this.FindAttribute(name);
-            if (attribute >= 0)
-                return ((XmlReader_XmlAttribute)this._attributes[attribute]).Value;
-            return (string)null;
-        }
-
-        private int FindAttribute(string name)
-        {
-            name = this._nameTable.Get(name);
-            if (name != null)
-            {
-                int count = this._attributes.Count;
-                for (int index = 0; index < count; ++index)
-                {
-                    if (object.ReferenceEquals((object)name, (object)((XmlReader_XmlAttribute)this._attributes[index]).Name))
-                        return index;
-                }
-            }
-            return -1;
-        }
-
-        private int FindAttribute(string localName, string namespaceURI)
-        {
-            localName = this._nameTable.Get(localName);
-            namespaceURI = this._nameTable.Get(namespaceURI);
-            if (localName != null && namespaceURI != null)
-            {
-                int count = this._attributes.Count;
-                for (int index = 0; index < count; ++index)
-                {
-                    XmlReader_XmlAttribute attribute = (XmlReader_XmlAttribute)this._attributes[index];
-                    if (object.ReferenceEquals((object)localName, (object)attribute.LocalName) && object.ReferenceEquals((object)namespaceURI, (object)attribute.NamespaceURI))
-                        return index;
-                }
-            }
-            return -1;
-        }
-
-        public virtual string GetAttribute(string localName, string namespaceURI)
-        {
-            int attribute = this.FindAttribute(localName, namespaceURI);
-            if (attribute >= 0)
-                return ((XmlReader_XmlAttribute)this._attributes[attribute]).Value;
-            return (string)null;
-        }
-
-        public virtual string GetAttribute(int i)
-        {
-            return ((XmlReader_XmlAttribute)this._attributes[i]).Value;
-        }
-
-        public virtual bool MoveToAttribute(string name)
-        {
-            int attribute = this.FindAttribute(name);
-            if (attribute < 0)
-                return false;
-            this._currentAttribute = attribute;
-            return true;
-        }
-
-        public virtual bool MoveToAttribute(string localName, string namespaceURI)
-        {
-            int attribute = this.FindAttribute(localName, namespaceURI);
-            if (attribute < 0)
-                return false;
-            this._currentAttribute = attribute;
-            return true;
-        }
-
-        public virtual void MoveToAttribute(int i)
-        {
-            if (i < 0 || i >= this._attributes.Count)
-                throw new ArgumentOutOfRangeException();
-            this._currentAttribute = i;
-        }
-
-        public virtual bool MoveToFirstAttribute()
-        {
-            if (this._attributes.Count <= 0)
-                return false;
-            this._currentAttribute = 0;
-            return true;
-        }
-
-        public virtual bool MoveToNextAttribute()
-        {
-            if (this._currentAttribute + 1 >= this._attributes.Count)
-                return false;
-            ++this._currentAttribute;
-            return true;
-        }
-
-        public virtual bool MoveToElement()
-        {
-            if (this._currentAttribute < 0)
-                return false;
-            this._currentAttribute = -1;
-            return true;
-        }
-
-        public virtual bool Read()
-        {
-            if (this._readState == ReadState.Initial)
-                this._readState = ReadState.Interactive;
-            if (this._readState == ReadState.Interactive)
-            {
-                if (this._currentAttribute >= 0)
-                {
-                    if (this.MoveToNextAttribute())
-                        return true;
-                    this._currentAttribute = -1;
-                }
-                if (this._length == 0)
-                {
-                    this._offset = 0;
-                    this._length = this._stream.Read(this._buffer, 0, 1024);
-                    if (this._length == 0)
-                    {
-                        if (this._isDone)
-                        {
-                            this.CleanUp(ReadState.EndOfFile);
-                            return false;
-                        }
-                        this._readState = ReadState.Error;
-                        throw new XmlException(XmlException.XmlExceptionErrorCode.UnexpectedEOF);
-                    }
-                }
-                int num1;
-                while (true)
-                {
-                    num1 = this.ReadInternal(0U);
-                    switch (num1)
-                    {
-                        case -805306368:
-                            goto label_13;
-                        case -788529152:
-                            int offset = this._offset + this._length;
-                            int num2 = this._stream.Read(this._buffer, offset, 1024 - offset);
-                            if (num2 != 0)
-                            {
-                                this._length += num2;
-                                continue;
-                            }
-                            goto label_15;
-                        default:
-                            goto label_19;
-                    }
-                }
-                label_13:
-                return true;
-                label_15:
-                this.ReadInternal(0U);
-                if (this._isDone)
-                {
-                    this.CleanUp(ReadState.EndOfFile);
-                    return false;
-                }
-                this._readState = ReadState.Error;
-                throw new XmlException(XmlException.XmlExceptionErrorCode.UnexpectedEOF);
-                label_19:
-                this._readState = ReadState.Error;
-                throw new XmlException((XmlException.XmlExceptionErrorCode)num1);
-            }
-            return false;
-        }
-
-        public virtual bool EOF
-        {
-            get
-            {
-                return this._readState == ReadState.EndOfFile;
-            }
-        }
-
-        public virtual void Close()
-        {
-            this.CleanUp(ReadState.Closed);
-            this._stream.Close();
-        }
-
-        private void CleanUp(ReadState readState)
-        {
-            this._xmlSpaces.Clear();
-            this._xmlLangs.Clear();
-            this._xmlNodes.Clear();
-            this._attributes.Clear();
-            this._namespaces.Clear();
-            this._value = string.Empty;
-            this._isEmptyElement = false;
-            this._nodeType = XmlNodeType.None;
-            this._currentAttribute = -1;
-            this._readState = readState;
-            this._xmlSpaces.Push((object)0);
-            this._xmlLangs.Push((object)string.Empty);
-            this._xmlNodes.Push((object)new XmlReader_XmlNode());
-        }
-
-        public virtual ReadState ReadState
-        {
-            get
-            {
-                return this._readState;
-            }
-        }
-
-        public virtual void Skip()
-        {
-            if (this._readState != ReadState.Interactive)
-                return;
-            if (this._currentAttribute >= 0)
-                this._currentAttribute = -1;
-            if (this._nodeType == XmlNodeType.Element && !this._isEmptyElement)
-            {
-                int count = this._xmlNodes.Count;
-                do
-                    ;
-                while (this.Read() && count < this._xmlNodes.Count);
-                if (this._nodeType != XmlNodeType.EndElement)
-                    return;
-                this.Read();
+              str = this.Value;
+              goto case XmlNodeType.ProcessingInstruction;
             }
             else
-                this.Read();
-        }
-
-        public virtual XmlNameTable NameTable
-        {
-            get
             {
-                return this._nameTable;
+              if (bufferBuilder == null)
+              {
+                bufferBuilder = new BufferBuilder();
+                bufferBuilder.Append(str);
+              }
+              bufferBuilder.Append(this.Value);
+              goto case XmlNodeType.ProcessingInstruction;
             }
-        }
-
-        [MethodImpl(MethodImplOptions.InternalCall)]
-        public virtual extern string LookupNamespace(string prefix);
-
-        public virtual string ReadString()
-        {
-            if (this._readState != ReadState.Interactive)
-                return "";
-            if (this._currentAttribute >= 0)
-                this._currentAttribute = -1;
-            if (this._nodeType == XmlNodeType.Element)
+          case XmlNodeType.EntityReference:
+            if (this.CanResolveEntity)
             {
-                if (this._isEmptyElement)
-                    return "";
-                if (!this.Read())
-                    throw new InvalidOperationException();
-                if (this._nodeType == XmlNodeType.EndElement)
-                    return "";
+              this.ResolveEntity();
+              goto case XmlNodeType.ProcessingInstruction;
             }
-            string str = "";
-            while ((204L & (long)(1 << (int)(this._nodeType & (XmlNodeType)31))) != 0L)
-            {
-                str += this._value;
-                if (!this.Read())
-                    throw new InvalidOperationException();
-            }
-            return str;
+            else
+              goto label_11;
+          case XmlNodeType.ProcessingInstruction:
+          case XmlNodeType.Comment:
+          case XmlNodeType.EndEntity:
+            continue;
+          default:
+            goto label_11;
         }
-
-        public virtual XmlNodeType MoveToContent()
-        {
-            if (this._currentAttribute >= 0)
-            {
-                this._currentAttribute = -1;
-                return this._nodeType;
-            }
-            do
-            {
-                switch (this._nodeType)
-                {
-                    case XmlNodeType.Element:
-                    case XmlNodeType.Text:
-                    case XmlNodeType.CDATA:
-                    case XmlNodeType.EndElement:
-                        return this._nodeType;
-                    default:
-                        continue;
-                }
-            }
-            while (this.Read());
-            return XmlNodeType.None;
-        }
-
-        public virtual void ReadStartElement()
-        {
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            this.Read();
-        }
-
-        public virtual void ReadStartElement(string name)
-        {
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            if (!XmlReader.StringRefEquals(((XmlReader_XmlNode)this._xmlNodes.Peek()).Name, name))
-                throw new XmlException(XmlException.XmlExceptionErrorCode.ElementNotFound);
-            this.Read();
-        }
-
-        public virtual void ReadStartElement(string localname, string ns)
-        {
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-            if (!XmlReader.StringRefEquals(xmlReaderXmlNode.LocalName, localname) || !XmlReader.StringRefEquals(xmlReaderXmlNode.NamespaceURI, ns))
-                throw new XmlException(XmlException.XmlExceptionErrorCode.ElementNotFound);
-            this.Read();
-        }
-
-        public virtual string ReadElementString()
-        {
-            string str = "";
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            if (!this._isEmptyElement)
-            {
-                str = this.ReadString();
-                if (this._nodeType != XmlNodeType.EndElement)
-                    throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            }
-            this.Read();
-            return str;
-        }
-
-        public virtual string ReadElementString(string name)
-        {
-            string str = "";
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            if (!XmlReader.StringRefEquals(((XmlReader_XmlNode)this._xmlNodes.Peek()).Name, name))
-                throw new XmlException(XmlException.XmlExceptionErrorCode.ElementNotFound);
-            if (!this._isEmptyElement)
-            {
-                str = this.ReadString();
-                if (this._nodeType != XmlNodeType.EndElement)
-                    throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            }
-            this.Read();
-            return str;
-        }
-
-        public virtual string ReadElementString(string localname, string ns)
-        {
-            string str = "";
-            if (this.MoveToContent() != XmlNodeType.Element)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-            if (!XmlReader.StringRefEquals(xmlReaderXmlNode.LocalName, localname) || !XmlReader.StringRefEquals(xmlReaderXmlNode.NamespaceURI, ns))
-                throw new XmlException(XmlException.XmlExceptionErrorCode.ElementNotFound);
-            if (!this._isEmptyElement)
-            {
-                str = this.ReadString();
-                if (this._nodeType != XmlNodeType.EndElement)
-                    throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            }
-            this.Read();
-            return str;
-        }
-
-        public virtual void ReadEndElement()
-        {
-            if (this.MoveToContent() != XmlNodeType.EndElement)
-                throw new XmlException(XmlException.XmlExceptionErrorCode.InvalidNodeType);
-            this.Read();
-        }
-
-        public virtual bool IsStartElement()
-        {
-            return this.MoveToContent() == XmlNodeType.Element;
-        }
-
-        public virtual bool IsStartElement(string name)
-        {
-            if (this.MoveToContent() == XmlNodeType.Element)
-                return XmlReader.StringRefEquals(((XmlReader_XmlNode)this._xmlNodes.Peek()).Name, name);
-            return false;
-        }
-
-        public virtual bool IsStartElement(string localname, string ns)
-        {
-            if (this.MoveToContent() != XmlNodeType.Element)
-                return false;
-            XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-            if (XmlReader.StringRefEquals(xmlReaderXmlNode.LocalName, localname))
-                return XmlReader.StringRefEquals(xmlReaderXmlNode.NamespaceURI, ns);
-            return false;
-        }
-
-        public virtual bool ReadToFollowing(string name)
-        {
-            if (name == null || name.Length == 0)
-                throw new ArgumentException();
-            name = this._nameTable.Add(name);
-            if (this._currentAttribute >= 0)
-                this._currentAttribute = -1;
-            while (this.Read())
-            {
-                if (this._nodeType == XmlNodeType.Element && object.ReferenceEquals((object)((XmlReader_XmlNode)this._xmlNodes.Peek()).Name, (object)name))
-                    return true;
-            }
-            return false;
-        }
-
-        public virtual bool ReadToFollowing(string localName, string namespaceURI)
-        {
-            if (localName == null || localName.Length == 0 || namespaceURI == null)
-                throw new ArgumentException();
-            localName = this.NameTable.Add(localName);
-            namespaceURI = this.NameTable.Add(namespaceURI);
-            if (this._currentAttribute >= 0)
-                this._currentAttribute = -1;
-            while (this.Read())
-            {
-                if (this._nodeType == XmlNodeType.Element)
-                {
-                    XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-                    if (object.ReferenceEquals((object)xmlReaderXmlNode.LocalName, (object)localName) && object.ReferenceEquals((object)xmlReaderXmlNode.NamespaceURI, (object)namespaceURI))
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        public virtual bool ReadToDescendant(string name)
-        {
-            if (name == null || name.Length == 0)
-                throw new ArgumentException();
-            if (this._currentAttribute >= 0)
-                return false;
-            int count = this._xmlNodes.Count;
-            if (this._nodeType != XmlNodeType.Element)
-            {
-                if (this._readState != ReadState.Initial)
-                    return false;
-                --count;
-            }
-            else if (this._isEmptyElement)
-                return false;
-            name = this._nameTable.Add(name);
-            while (this.Read() && this._xmlNodes.Count > count)
-            {
-                if (this._nodeType == XmlNodeType.Element && object.ReferenceEquals((object)name, (object)((XmlReader_XmlNode)this._xmlNodes.Peek()).Name))
-                    return true;
-            }
-            return false;
-        }
-
-        public virtual bool ReadToDescendant(string localName, string namespaceURI)
-        {
-            if (localName == null || localName.Length == 0 || namespaceURI == null)
-                throw new ArgumentException();
-            if (this._currentAttribute >= 0)
-                return false;
-            int count = this._xmlNodes.Count;
-            if (this._nodeType != XmlNodeType.Element)
-            {
-                if (this._readState != ReadState.Initial)
-                    return false;
-                --count;
-            }
-            else if (this._isEmptyElement)
-                return false;
-            localName = this._nameTable.Add(localName);
-            namespaceURI = this._nameTable.Add(namespaceURI);
-            while (this.Read() && this._xmlNodes.Count > count)
-            {
-                if (this._nodeType == XmlNodeType.Element)
-                {
-                    XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-                    if (object.ReferenceEquals((object)localName, (object)xmlReaderXmlNode.LocalName) && object.ReferenceEquals((object)namespaceURI, (object)xmlReaderXmlNode.NamespaceURI))
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        public virtual bool ReadToNextSibling(string name)
-        {
-            if (name == null || name.Length == 0)
-                throw new ArgumentException();
-            name = this.NameTable.Add(name);
-            do
-            {
-                this.Skip();
-                if (this._nodeType == XmlNodeType.Element && object.ReferenceEquals((object)name, (object)((XmlReader_XmlNode)this._xmlNodes.Peek()).Name))
-                    return true;
-            }
-            while (this._nodeType != XmlNodeType.EndElement && this._readState != ReadState.EndOfFile);
-            return false;
-        }
-
-        public virtual bool ReadToNextSibling(string localName, string namespaceURI)
-        {
-            if (localName == null || localName.Length == 0 || namespaceURI == null)
-                throw new ArgumentException();
-            localName = this._nameTable.Add(localName);
-            namespaceURI = this._nameTable.Add(namespaceURI);
-            do
-            {
-                this.Skip();
-                if (this._nodeType == XmlNodeType.Element)
-                {
-                    XmlReader_XmlNode xmlReaderXmlNode = (XmlReader_XmlNode)this._xmlNodes.Peek();
-                    if (object.ReferenceEquals((object)this.LocalName, (object)xmlReaderXmlNode.LocalName) && object.ReferenceEquals((object)namespaceURI, (object)xmlReaderXmlNode.NamespaceURI))
-                        return true;
-                }
-            }
-            while (this._nodeType != XmlNodeType.EndElement && this._readState != ReadState.EndOfFile);
-            return false;
-        }
-
-        public virtual bool HasAttributes
-        {
-            get
-            {
-                return this._attributes.Count > 0;
-            }
-        }
-
-        public void Dispose()
-        {
-            if (this.ReadState == ReadState.Closed)
-                return;
-            this.Close();
-        }
-
-        private XmlReader()
-        {
-        }
-
-        public static XmlReader Create(Stream input)
-        {
-            return XmlReader.Create(input, (XmlReaderSettings)null);
-        }
-
-        public static XmlReader Create(Stream input, XmlReaderSettings settings)
-        {
-            if (input == null)
-                throw new ArgumentNullException();
-            if (settings == null)
-                settings = new XmlReaderSettings();
-            XmlReader xmlReader = new XmlReader();
-            xmlReader._xmlSpaces = new Stack();
-            xmlReader._xmlLangs = new Stack();
-            xmlReader._xmlNodes = new Stack();
-            xmlReader._attributes = new ArrayList();
-            xmlReader._namespaces = new Stack();
-            xmlReader._value = string.Empty;
-            xmlReader._nodeType = XmlNodeType.None;
-            xmlReader._isEmptyElement = false;
-            xmlReader._isDone = false;
-            xmlReader._buffer = new byte[1024];
-            xmlReader._offset = 0;
-            xmlReader._length = 0;
-            xmlReader._stream = input;
-            xmlReader._readState = ReadState.Initial;
-            xmlReader._nameTable = settings.NameTable == null ? new XmlNameTable() : settings.NameTable;
-            xmlReader._xmlNodes.Push((object)new XmlReader_XmlNode());
-            xmlReader._xmlSpaces.Push((object)0);
-            xmlReader._xmlLangs.Push((object)string.Empty);
-            xmlReader._namespaces.Push((object)new XmlReader_NamespaceEntry()
-            {
-                Prefix = string.Empty,
-                NamespaceURI = string.Empty
-            });
-            xmlReader._namespaces.Push((object)new XmlReader_NamespaceEntry()
-            {
-                Prefix = xmlReader._nameTable.Add(XmlReader.Xml),
-                NamespaceURI = xmlReader._nameTable.Add(XmlReader.XmlNamespace)
-            });
-            xmlReader._namespaces.Push((object)new XmlReader_NamespaceEntry()
-            {
-                Prefix = xmlReader._nameTable.Add(XmlReader.Xmlns),
-                NamespaceURI = xmlReader._nameTable.Add(XmlReader.XmlnsNamespace)
-            });
-            xmlReader._currentAttribute = -1;
-            xmlReader.Initialize(settings.GetSettings());
-            return xmlReader;
-        }
+      }
+      while ((this.AttributeCount != 0 ? (this.ReadAttributeValue() ? 1 : 0) : (this.Read() ? 1 : 0)) != 0);
+label_11:
+      if (bufferBuilder != null)
+        return bufferBuilder.ToString();
+      return str;
     }
+
+    private bool SetupReadElementContentAsXxx(string methodName)
+    {
+      if (this.NodeType != XmlNodeType.Element)
+        throw this.CreateReadElementContentAsException(methodName);
+      bool isEmptyElement = this.IsEmptyElement;
+      this.Read();
+      if (isEmptyElement)
+        return false;
+      switch (this.NodeType)
+      {
+        case XmlNodeType.Element:
+          throw new XmlException(52, "", this as IXmlLineInfo);
+        case XmlNodeType.EndElement:
+          this.Read();
+          return false;
+        default:
+          return true;
+      }
+    }
+
+    private void FinishReadElementContentAsXxx()
+    {
+      if (this.NodeType != XmlNodeType.EndElement)
+        throw new XmlException(27, this.NodeType.ToString());
+      this.Read();
+    }
+
+    internal static Encoding GetEncoding(XmlReader reader)
+    {
+      return XmlReader.GetXmlTextReader(reader)?.Encoding;
+    }
+
+    internal static ConformanceLevel GetV1ConformanceLevel(XmlReader reader)
+    {
+      XmlTextReader xmlTextReader = XmlReader.GetXmlTextReader(reader);
+      if (xmlTextReader == null)
+        return ConformanceLevel.Document;
+      return xmlTextReader.V1ComformanceLevel;
+    }
+
+    private static XmlTextReader GetXmlTextReader(XmlReader reader)
+    {
+      return reader as XmlTextReader ?? (XmlTextReader) null;
+    }
+
+    public static XmlReader Create(Stream input)
+    {
+      XmlReaderSettings settings = new XmlReaderSettings();
+      return XmlReader.CreateReaderImpl(input, settings, "", settings.CloseInput);
+    }
+
+    public static XmlReader Create(Stream input, XmlReaderSettings settings)
+    {
+      return XmlReader.Create(input, settings, "");
+    }
+
+    public static XmlReader Create(Stream input, XmlReaderSettings settings, string baseUri)
+    {
+      if (settings == null)
+        settings = new XmlReaderSettings();
+      return XmlReader.CreateReaderImpl(input, settings, baseUri, settings.CloseInput);
+    }
+
+    private static XmlReader CreateReaderImpl(Stream input, XmlReaderSettings settings, string baseUriStr, bool closeInput)
+    {
+      if (input == null)
+        throw new ArgumentNullException(nameof (input));
+      if (baseUriStr == null)
+        baseUriStr = "";
+      return (XmlReader) new XmlTextReader(input, (byte[]) null, 0, settings, baseUriStr, closeInput);
+    }
+
+    internal static int CalcBufferSize(Stream input)
+    {
+      int num = 4096;
+      if (input.CanSeek)
+      {
+        long length = input.Length;
+        if (length < (long) num)
+          num = (int) length;
+        else if (length > 65536L)
+          num = 8192;
+      }
+      return num;
+    }
+  }
 }

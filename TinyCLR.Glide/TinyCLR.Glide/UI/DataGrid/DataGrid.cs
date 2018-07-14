@@ -13,6 +13,8 @@ using GHI.Glide.Display;
 using GHI.Glide.Geom;
 using TinyCLR.Glide.Properties;
 using System.Drawing;
+using TinyCLR.Glide.Ext;
+
 namespace GHI.Glide.UI
 {
     /// <summary>
@@ -22,9 +24,10 @@ namespace GHI.Glide.UI
     {
         private ArrayList _columns = new ArrayList();
         private ArrayList _rows = new ArrayList();
+        private Display.Graphics _headers;
+        private Display.Graphics _items;
+      
 
-        private Bitmap _headers;
-        private Bitmap _items;
         private Bitmap _DataGridIcon_Asc = Resources.GetBitmap(Resources.BitmapResources.DataGridIcon_Asc);
         private Bitmap _DataGridIcon_Desc = Resources.GetBitmap(Resources.BitmapResources.DataGridIcon_Desc);
 
@@ -75,8 +78,8 @@ namespace GHI.Glide.UI
             // Show headers is on by default.
             // When the headers are shown the row count is decreased by one.
             ShowHeaders = true;
-
-            _headers = new Bitmap(Width, RowHeight);
+            
+            _headers = new Display.Graphics(Width,rowHeight);
 
             Clear();
         }
@@ -102,8 +105,10 @@ namespace GHI.Glide.UI
         private void RenderHeaders()
         {
             int x = 0;
+           
+            _headers.DrawRectangle(new Geom.Rectangle( x, 0, Width, _headers.GetBitmap().Height),HeadersBackColor,255);
 
-            _headers.GetInternalBitmap().DrawRectangle(0, 0, x, 0, Width, _headers.Height, 0, 0, HeadersBackColor.ToNativeColor(), 0, 0, 0, 0, 0, 255);
+            //_headers.DrawRectangle(0, 0, x, 0, Width, _headers.Height, 0, 0, HeadersBackColor.ToNativeColor(), 0, 0, 0, 0, 0, 255);
 
             DataGridColumn dataGridColumn;
             for (int j = 0; j < _columns.Count; j++)
@@ -111,18 +116,20 @@ namespace GHI.Glide.UI
                 dataGridColumn = (DataGridColumn)_columns[j];
 
                 // Draw text
-                _headers.GetInternalBitmap().DrawTextInRect(dataGridColumn.Label, x + 5, (_headers.Height - Font.Height) / 2, dataGridColumn.Width, _headers.Height, 0, HeadersFontColor, Font);
+                _headers.DrawTextInRect(dataGridColumn.Label, x + 5, (_headers.GetBitmap().Height - Font.Height) / 2, dataGridColumn.Width, _headers.GetBitmap().Height, 0, HeadersFontColor, Font);
 
                 // If we're on the selected column draw the icon.
                 if (j == _selectedDataGridColumnIndex)
                 {
                     int width = 0, height = 0;
-                    Font.ComputeExtent(dataGridColumn.Label, out width, out height);
-
+                    //Font.ComputeExtent(dataGridColumn.Label, out width, out height);
+                    var size = Glide.screen.MeasureString(dataGridColumn.Label, Font);
+                    width =(int) size.Width;
+                    height =(int) size.Height;
                     if (dataGridColumn.Order == Order.ASC)
-                        _headers.GetInternalBitmap().DrawImage(x + 10 + width, 5, _DataGridIcon_Asc.GetInternalBitmap(), 0, 0, _DataGridIcon_Asc.Width, _DataGridIcon_Asc.Height, 0xff);
+                        _headers.DrawImage(x + 10 + width, 5, _DataGridIcon_Asc, 0, 0, _DataGridIcon_Asc.Width, _DataGridIcon_Asc.Height, 0xff);
                     else
-                        _headers.GetInternalBitmap().DrawImage(x + 10 + width, 5, _DataGridIcon_Desc.GetInternalBitmap(), 0, 0, _DataGridIcon_Desc.Width, _DataGridIcon_Desc.Height, 0xff);
+                        _headers.DrawImage(x + 10 + width, 5, _DataGridIcon_Desc, 0, 0, _DataGridIcon_Desc.Width, _DataGridIcon_Desc.Height, 0xff);
                 }
 
                 x += dataGridColumn.Width;
@@ -149,16 +156,17 @@ namespace GHI.Glide.UI
         {
             int x = 0;
             int y = index * RowHeight;
+            _items.DrawRectangle(new Geom.Rectangle( x, y, Width, RowHeight),backColor,255);
 
-            _items.GetInternalBitmap().DrawRectangle(0, 0, x, y, Width, RowHeight, 0, 0, backColor.ToNativeColor(), 0, 0, 0, 0, 0, 255);
+            //_items.DrawRectangle(0, 0, x, y, Width, RowHeight, 0, 0, backColor.ToNativeColor(), 0, 0, 0, 0, 0, 255);
 
             DataGridColumn dataGridColumn;
             for (int i = 0; i < _columns.Count; i++)
             {
                 dataGridColumn = (DataGridColumn)_columns[i];
 
-                _items.GetInternalBitmap().DrawTextInRect(data[i].ToString(), x + 5, y + (RowHeight - Font.Height) / 2, dataGridColumn.Width, RowHeight, 0, fontColor, Font);
-                _items.GetInternalBitmap().DrawLine(GridColor.ToNativeColor(), 1, x, y, x, y + RowHeight);
+                _items.DrawTextInRect(data[i].ToString(), x + 5, y + (RowHeight - Font.Height) / 2, dataGridColumn.Width, RowHeight, 0, fontColor, Font);
+                _items.DrawLine(GridColor, 1, x, y, x, y + RowHeight);
 
                 x += dataGridColumn.Width;
             }
@@ -167,17 +175,17 @@ namespace GHI.Glide.UI
         private void RenderItemClear(int index)
         {
             // HACK: This is done to prevent image/color retention.
-            _items.GetInternalBitmap().DrawRectangle(0, 0, 0, index * RowHeight, Width, RowHeight, 0, 0, 0, 0, 0, 0, 0, 0, 255);
+            _items.DrawRectangle(Color.Black,1, 0, index * RowHeight, Width, RowHeight, 0, 0, Colors.Transparent, 0, 0, Colors.Transparent, 0, 0, 255);
         }
 
         private void RenderEmpty()
         {
-            _items.GetInternalBitmap().DrawRectangle(0, 0, 0, 0, _items.Width, _items.Height, 0, 0, ItemsBackColor.ToNativeColor(), 0, 0, 0, 0, 0, 255);
+            _items.DrawRectangle(ItemsBackColor,1, 0, 0, _items.GetBitmap().Width, _items.GetBitmap().Height, 0, 0, ItemsBackColor, 0, 0, Colors.Black, 0, 0, 255);
 
             int x = 0;
             for (int i = 0; i < _columns.Count; i++)
             {
-                _items.GetInternalBitmap().DrawLine(GridColor.ToNativeColor(), 1, x, 0, x, _items.Height);
+                _items.DrawLine(GridColor, 1, x, 0, x, _items.GetBitmap().Height);
                 x += ((DataGridColumn)_columns[i]).Width;
             }
         }
@@ -198,21 +206,22 @@ namespace GHI.Glide.UI
                 _renderItems = false;
 
                 // Only recreate the items Bitmap if necessary
-                if (_items == null || _items.Height != _rows.Count * RowHeight)
+                if (_items == null || _items.GetBitmap().Height != _rows.Count * RowHeight)
                 {
                     if (_items != null)
                         _items.Dispose();
 
                     if (_rows.Count < _rowCount)
                     {
-                        _items = new Bitmap(Width, _rowCount * RowHeight);
+                        _items = new Display.Graphics(Width, _rowCount * RowHeight);
+                    
                         RenderEmpty();
                     }
                     else
-                        _items = new Bitmap(Width, _rows.Count * RowHeight);
+                        _items = new Display.Graphics(Width, _rows.Count * RowHeight);
                 }
                 else
-                    _items.GetInternalBitmap().DrawRectangle(0, 0, 0, 0, Width, _items.Height, 0, 0, 0, 0, 0, 0, 0, 0, 255);
+                    _items.DrawRectangle(Colors.Black, 1, 0, 0, Width, _items.GetBitmap().Height, 0, 0, Colors.Transparent, 0, 0, Colors.Transparent, 0, 0, 255);
 
                 if (_rows.Count > 0)
                 {
@@ -226,11 +235,11 @@ namespace GHI.Glide.UI
 
             if (_showHeaders)
             {
-                Parent.Graphics.DrawImage(x, y, _headers.GetInternalBitmap(), 0, 0, Width, RowHeight);
+                Parent.Graphics.DrawImage(x, y, _headers.GetBitmap(), 0, 0, Width, RowHeight);
                 y += RowHeight;
             }
 
-            Parent.Graphics.DrawImage(x, y, _items.GetInternalBitmap(), 0, _listY, Width, _rowCount * RowHeight);
+            Parent.Graphics.DrawImage(x, y, _items.GetBitmap(), 0, _listY, Width, _rowCount * RowHeight);
 
             if (ShowScrollbar)
             {

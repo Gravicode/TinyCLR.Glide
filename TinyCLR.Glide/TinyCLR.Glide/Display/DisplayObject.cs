@@ -111,7 +111,7 @@ namespace GHI.Glide.Display
         /// Renders this display object on a specified bitmap.
         /// </summary>
         /// <param name="bitmap"></param>
-        public virtual void Render(System.Drawing.Bitmap bitmap)
+        public virtual void Render(Display.Graphics bitmap)
         {
             // Do something
         }

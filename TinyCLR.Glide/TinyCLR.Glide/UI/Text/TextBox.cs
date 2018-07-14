@@ -9,6 +9,7 @@ using System;
 //using Microsoft.SPOT.Presentation.Media;
 using GHI.Glide.Display;
 using GHI.Glide.Geom;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -37,7 +38,7 @@ namespace GHI.Glide.UI
 
             // Default
             Text = String.Empty;
-            TextAlign = System.Drawing.Internal.Bitmap.DT_AlignmentLeft;
+            TextAlign = Bitmaps.DT_AlignmentLeft;
             Font = FontManager.GetFont(FontManager.FontType.droid_reg12);
             FontColor = TinyCLR.Glide.Ext.Colors.Black;
         }
@@ -50,7 +51,7 @@ namespace GHI.Glide.UI
             int x = Parent.X + X;
             int y = Parent.Y + Y;
             ushort alpha = (Enabled) ? Alpha : (ushort)(Alpha / 3);
-            Parent.Graphics.Scale9Image(x, y, Width, Height, _TextBox.GetInternalBitmap(), 5, 5, 5, 5, alpha);
+            Parent.Graphics.Scale9Image(x, y, Width, Height, _TextBox, 5, 5, 5, 5, alpha);
             Parent.Graphics.DrawTextInRect(ShortenText(Text), x + leftMargin, y + ((Height - Font.Height) / 2), Width - (leftMargin * 2), Height, TextAlign, FontColor, Font);
         }
 

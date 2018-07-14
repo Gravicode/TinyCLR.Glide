@@ -125,9 +125,10 @@ namespace GHI.Glide
         /// <returns></returns>
         public static Geom.Rectangle GetRect(Font font, string str)
         {
-            int width = 0, height = 0;
-            font.ComputeExtent(str, out width, out height);
-            return new Geom.Rectangle(0, 0, width, height);
+            //int width = 0, height = 0;
+            var calc = Glide.screen.MeasureString(str, font);
+            //font.ComputeExtent(str, out width, out height);
+            return new Geom.Rectangle(0, 0,(int) calc.Width, (int)calc.Height);
         }
 
         /// <summary>
@@ -138,9 +139,10 @@ namespace GHI.Glide
         /// <returns></returns>
         public static Size GetSize(Font font, string str)
         {
-            int width = 0, height = 0;
-            font.ComputeExtent(str, out width, out height);
-            return new Size { Width = width, Height = height };
+            //int width = 0, height = 0;
+            //font.ComputeExtent(str, out width, out height);
+            var calc = Glide.screen.MeasureString(str, font);
+            return new Size { Width = (int)calc.Width, Height=(int)calc.Height} ;
         }
 
     }

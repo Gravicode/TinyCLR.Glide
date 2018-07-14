@@ -102,18 +102,15 @@
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.12.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.12.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.12.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
     </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Storage, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Storage.0.12.0\lib\net452\GHIElectronics.TinyCLR.Storage.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GHIElectronics.TinyCLR.Drawing\GHIElectronics.TinyCLR.Drawing.csproj">
-      <Project>{A369BF4B-ABC3-4FDC-9389-D30FBBBD8047}</Project>
-      <Name>GHIElectronics.TinyCLR.Drawing</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

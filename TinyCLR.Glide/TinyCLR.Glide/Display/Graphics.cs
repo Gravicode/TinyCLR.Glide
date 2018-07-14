@@ -9,6 +9,8 @@ using System.Drawing.Internal;
 ////using Microsoft.SPOT;
 ////using Microsoft.SPOT.Presentation.Media;
 using GHI.Glide.Geom;
+using System.Drawing;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.Display
 {
@@ -18,8 +20,8 @@ namespace GHI.Glide.Display
     public sealed class Graphics
     {
         
-        private Bitmap _bitmap;
-       
+        private Bitmap _realBitmap;
+        private System.Drawing.Graphics _bitmap;
         /// <summary>
         /// Creates a new Graphics object.
         /// </summary>
@@ -27,7 +29,8 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public Graphics(int width, int height)
         {
-            _bitmap = new System.Drawing.Internal.Bitmap(width, height);
+            _realBitmap = new Bitmap(width, height);
+            _bitmap = System.Drawing.Graphics.FromImage(_realBitmap);
             
         }
 
@@ -36,7 +39,7 @@ namespace GHI.Glide.Display
         /// </summary>
         public void Clear()
         {
-            _bitmap.Clear();
+            _bitmap.Clear(Colors.Black);
         }
 
         /// <summary>
@@ -57,7 +60,10 @@ namespace GHI.Glide.Display
         /// <param name="yRadius">Y Radius</param>
         public void DrawEllipse(System.Drawing.Color colorOutline, int x, int y, int xRadius, int yRadius)
         {
-            _bitmap.DrawEllipse(colorOutline.ToNativeColor(),1, x, y, xRadius, yRadius,0,0,0,0,0,0, 0xff);
+            var width = 2 * xRadius;
+            var height = 2 * yRadius;
+            var pen = new Pen(new SolidBrush(colorOutline));
+            _bitmap.DrawEllipse(pen,x,y,width,height);
         }
 
         /// <summary>
@@ -78,7 +84,11 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void DrawEllipse(System.Drawing.Color colorOutline, int thicknessOutline, int x, int y, int xRadius, int yRadius, System.Drawing.Color colorGradientStart, int xGradientStart, int yGradientStart, System.Drawing.Color colorGradientEnd, int xGradientEnd, int yGradientEnd, ushort opacity)
         {
-            _bitmap.DrawEllipse(colorOutline.ToNativeColor(), thicknessOutline, x, y, xRadius, yRadius, colorGradientStart.ToNativeColor(), xGradientStart, yGradientStart, colorGradientEnd.ToNativeColor(), xGradientEnd, yGradientEnd, opacity);
+            var width = 2 * xRadius;
+            var height = 2 * yRadius;
+            var pen = new Pen(new SolidBrush(colorOutline));
+            _bitmap.DrawEllipse(pen, x, y, width, height);
+            //_bitmap.DrawEllipse(colorOutline.ToNativeColor(), thicknessOutline, x, y, xRadius, yRadius, colorGradientStart.ToNativeColor(), xGradientStart, yGradientStart, colorGradientEnd.ToNativeColor(), xGradientEnd, yGradientEnd, opacity);
         }
 
         /// <summary>
@@ -93,7 +103,8 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public void DrawImage(int xDst, int yDst, Bitmap bitmap, int xSrc, int ySrc, int width, int height)
         {
-            _bitmap.DrawImage(xDst, yDst, bitmap, xSrc, ySrc, width, height, 0xff);
+            _bitmap.DrawImage(bitmap, xDst, yDst, new System.Drawing.Rectangle(xSrc, ySrc, width, height), GraphicsUnit.Pixel);
+            //_bitmap.DrawImage(xDst, yDst, bitmap, xSrc, ySrc, width, height, 0xff);
         }
 
         /// <summary>
@@ -109,7 +120,8 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void DrawImage(int xDst, int yDst, Bitmap bitmap, int xSrc, int ySrc, int width, int height, ushort opacity)
         {
-            _bitmap.DrawImage(xDst, yDst, bitmap, xSrc, ySrc, width, height, opacity);
+            _bitmap.DrawImage(bitmap, xDst, yDst, new System.Drawing.Rectangle(xSrc, ySrc, width, height), GraphicsUnit.Pixel);
+            //_bitmap.DrawImage(xDst, yDst, bitmap, xSrc, ySrc, width, height, opacity);
         }
 
         /// <summary>
@@ -123,7 +135,9 @@ namespace GHI.Glide.Display
         /// <param name="y1">Ending Y.</param>
         public void DrawLine(System.Drawing.Color color, int thickness, int x0, int y0, int x1, int y1)
         {
-            _bitmap.DrawLine(color.ToNativeColor(), thickness, x0, y0, x1, y1);
+            var pen = new Pen(new SolidBrush(color),thickness);
+            _bitmap.DrawLine(pen, x0, y0, x1, y1);
+            //_bitmap.DrawLine(color.ToNativeColor(), thickness, x0, y0, x1, y1);
         }
 
         /// <summary>
@@ -146,7 +160,9 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void DrawRectangle(System.Drawing.Color colorOutline, int thicknessOutline, int x, int y, int width, int height, int xCornerRadius, int yCornerRadius, System.Drawing.Color colorGradientStart, int xGradientStart, int yGradientStart, System.Drawing.Color colorGradientEnd, int xGradientEnd, int yGradientEnd, ushort opacity)
         {
-            _bitmap.DrawRectangle(colorOutline.ToNativeColor(), thicknessOutline, x, y, width, height, xCornerRadius, yCornerRadius, colorGradientStart.ToNativeColor(), xGradientStart, yGradientStart, colorGradientEnd.ToNativeColor(), xGradientEnd, yGradientEnd, opacity);
+            var pen = new Pen(new SolidBrush(colorOutline),thicknessOutline);
+            _bitmap.DrawRectangle(pen, x, y, width, height);
+            //_bitmap.DrawRectangle(colorOutline.ToNativeColor(), thicknessOutline, x, y, width, height, xCornerRadius, yCornerRadius, colorGradientStart.ToNativeColor(), xGradientStart, yGradientStart, colorGradientEnd.ToNativeColor(), xGradientEnd, yGradientEnd, opacity);
 
         }
 
@@ -156,9 +172,13 @@ namespace GHI.Glide.Display
         /// <param name="rect">Rectangle</param>
         /// <param name="color">Color</param>
         /// <param name="opacity">Opacity</param>
-        public void DrawRectangle(Rectangle rect, System.Drawing.Color color, ushort opacity)
+        public void DrawRectangle(Geom.Rectangle rect, System.Drawing.Color color, ushort opacity)
         {
-            _bitmap.DrawRectangle(0, 0, rect.X, rect.Y, rect.Width, rect.Height, 0, 0, color.ToNativeColor(), 0, 0, 0, 0, 0, opacity);
+            var brush = new SolidBrush(color);
+            //var pen = new Pen(color);
+            _bitmap.FillRectangle(brush, rect.X, rect.Y, rect.Width, rect.Height);
+            //_bitmap.DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
+            //_bitmap.DrawRectangle(0, 0, rect.X, rect.Y, rect.Width, rect.Height, 0, 0, color.ToNativeColor(), 0, 0, 0, 0, 0, opacity);
         }
 
         /// <summary>
@@ -171,7 +191,9 @@ namespace GHI.Glide.Display
         /// <param name="y">Y</param>
         public void DrawText(string text, System.Drawing.Font font, System.Drawing.Color color, int x, int y)
         {
-            _bitmap.DrawText(text, font, color.ToNativeColor(), x, y);
+            SolidBrush brush = new SolidBrush(color);
+            _bitmap.DrawString(text, font, brush, x, y);
+            //_bitmap.DrawText(text, font, color.ToNativeColor(), x, y);
         }
 
         /// <summary>
@@ -187,7 +209,9 @@ namespace GHI.Glide.Display
         /// <param name="font">Font</param>
         public void DrawTextInRect(string text, int x, int y, int width, int height, uint dtFlags, System.Drawing.Color color, System.Drawing.Font font)
         {
-            _bitmap.DrawTextInRect(text, x, y, width, height, dtFlags, color, font);
+            SolidBrush brush = new SolidBrush(color);
+            _bitmap.DrawString(text, font, brush,new RectangleF( x, y,width,height));
+            //_bitmap.DrawTextInRect(text, x, y, width, height, dtFlags, color, font);
         }
 
         /// <summary>
@@ -206,7 +230,10 @@ namespace GHI.Glide.Display
         /// <returns></returns>
         public bool DrawTextInRect(ref string text, ref int xRelStart, ref int yRelStart, int x, int y, int width, int height, uint dtFlags, System.Drawing.Color color, System.Drawing.Font font)
         {
-            return _bitmap.DrawTextInRect(ref text, ref xRelStart, ref yRelStart, x, y, width, height, dtFlags, color.ToNativeColor(), font);
+            SolidBrush brush = new SolidBrush(color);
+            _bitmap.DrawString(text, font, brush, new RectangleF(x, y, width, height));
+            return true;
+            //return _bitmap.DrawTextInRect(ref text, ref xRelStart, ref yRelStart, x, y, width, height, dtFlags, color.ToNativeColor(), font);
         }
 
         /// <summary>
@@ -217,9 +244,11 @@ namespace GHI.Glide.Display
         /// <param name="dtFlags">Flags found in Bitmap.</param>
         /// <param name="color">Color</param>
         /// <param name="font">Font</param>
-        public void DrawTextInRect(string text, Rectangle rect, uint dtFlags, System.Drawing.Color color, System.Drawing.Font font)
+        public void DrawTextInRect(string text, Geom.Rectangle rect, uint dtFlags, System.Drawing.Color color, System.Drawing.Font font)
         {
-            _bitmap.DrawTextInRect(text, rect.X, rect.Y, rect.Width, rect.Height, dtFlags, color, font);
+            SolidBrush brush = new SolidBrush(color);
+            _bitmap.DrawString(text, font, brush, rect.X, rect.Y);
+            //_bitmap.DrawTextInRect(text, rect.X, rect.Y, rect.Width, rect.Height, dtFlags, color, font);
         }
 
         /// <summary>
@@ -227,7 +256,7 @@ namespace GHI.Glide.Display
         /// </summary>
         public void Flush()
         {
-            _bitmap.Flush(Glide.Hdc);
+            _bitmap.Flush();
             //_bitmap.Flush(0,0,_bitmap.Width,_bitmap.Height);
         }
 
@@ -240,7 +269,7 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public void Flush(int x, int y, int width, int height)
         {
-            _bitmap.Flush(Glide.Hdc);
+            _bitmap.Flush();
             //_bitmap.Flush(x, y, width, height);
         }
 
@@ -250,7 +279,7 @@ namespace GHI.Glide.Display
         /// <returns></returns>
         public Bitmap GetBitmap()
         {
-            return _bitmap;
+            return _realBitmap;
         }
 
         //public Color GetPixel(int xPos, int yPos);
@@ -272,7 +301,8 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void Scale9Image(int xDst, int yDst, int widthDst, int heightDst, Bitmap bitmap, int leftBorder, int topBorder, int rightBorder, int bottomBorder, ushort opacity)
         {
-            _bitmap.Scale9Image(xDst, yDst, widthDst, heightDst, bitmap, leftBorder, topBorder, rightBorder, bottomBorder, opacity);
+            _bitmap.DrawImage(bitmap, new System.Drawing.Rectangle(xDst, yDst, widthDst, heightDst), new System.Drawing.Rectangle(leftBorder, topBorder, bitmap.Width-rightBorder, bitmap.Height-bottomBorder), GraphicsUnit.Pixel);
+            //_bitmap.Scale9Image(xDst, yDst, widthDst, heightDst, bitmap, leftBorder, topBorder, rightBorder, bottomBorder, opacity);
         }
 
         /// <summary>
@@ -287,7 +317,9 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void Scale9Image(int xDst, int yDst, int widthDst, int heightDst, Bitmap bitmap, int border, ushort opacity)
         {
-            _bitmap.Scale9Image(xDst, yDst, widthDst, heightDst, bitmap, border, border, border, border, opacity);
+            _bitmap.DrawImage(bitmap, new System.Drawing.Rectangle(xDst, yDst, widthDst, heightDst), new System.Drawing.Rectangle(border, border, bitmap.Width-border, bitmap.Height-border), GraphicsUnit.Pixel);
+
+            //_bitmap.Scale9Image(xDst, yDst, widthDst, heightDst, bitmap, border, border, border, border, opacity);
         }
 
         /// <summary>
@@ -299,7 +331,8 @@ namespace GHI.Glide.Display
         /// <param name="height">Height</param>
         public void SetClippingRectangle(int x, int y, int width, int height)
         {
-            _bitmap.SetClippingRectangle(x, y, width, height);
+            //need implementation here
+            //_bitmap.SetClippingRectangle(x, y, width, height);
         }
 
         //public void SetPixel(int xPos, int yPos, Color color);
@@ -315,7 +348,8 @@ namespace GHI.Glide.Display
         /// <param name="opacity">Opacity</param>
         public void StretchImage(int xDst, int yDst, Bitmap bitmap, int width, int height, ushort opacity)
         {
-            _bitmap.StretchImage(xDst, yDst, bitmap, width, height, opacity);
+            _bitmap.DrawImage(bitmap, new System.Drawing.Rectangle(xDst, yDst, width, height), new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
+            //_bitmap.StretchImage(xDst, yDst, bitmap, width, height, opacity);
         }
 
         //public void StretchImage(int xDst, int yDst, int widthDst, int heightDst, Bitmap bitmap, int xSrc, int ySrc, int widthSrc, int heightSrc, ushort opacity);

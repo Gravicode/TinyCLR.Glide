@@ -34,6 +34,10 @@ namespace GHI.Glide
         /// <returns>Window object.</returns>
         public static Window LoadWindow(string xmlStr)
         {
+            //StringBuilder sb = new StringBuilder(xmlStr);
+            //sb = sb.Replace("\n", String.Empty);
+            //sb = sb.Replace("\r", String.Empty);
+            //sb = sb.Replace("\t", String.Empty);
             return LoadWindow(UTF8Encoding.UTF8.GetBytes(xmlStr));
         }
 
@@ -49,8 +53,8 @@ namespace GHI.Glide
             xmlReaderSettings.IgnoreComments = true;
             xmlReaderSettings.IgnoreProcessingInstructions = true;
             xmlReaderSettings.IgnoreWhitespace = true;
-
-            MemoryStream stream = new MemoryStream(xmlBytes);
+            
+             MemoryStream stream = new MemoryStream(xmlBytes);
 
             XmlReader reader = XmlReader.Create(stream, xmlReaderSettings);
 

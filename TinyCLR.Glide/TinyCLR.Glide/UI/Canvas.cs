@@ -40,7 +40,7 @@ namespace GHI.Glide.UI
                         break;
 
                     case "DrawImage":
-                        Parent.Graphics.DrawImage((int)var[1], (int)var[2], (System.Drawing.Internal.Bitmap)var[3], (int)var[4], (int)var[5], (int)var[6], (int)var[7], (ushort)var[8]);
+                        Parent.Graphics.DrawImage((int)var[1], (int)var[2], (Bitmap)var[3], (int)var[4], (int)var[5], (int)var[6], (int)var[7], (ushort)var[8]);
                         break;
 
                     case "DrawLine":

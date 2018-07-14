@@ -55,7 +55,7 @@ namespace GHI.Glide.UI
             ushort alpha = (Enabled) ? Alpha : (ushort)(Alpha / 2);
 
             if (ShowBackground)
-                Parent.Graphics.Scale9Image(x, y, Width, Height, _RadioButton.GetInternalBitmap(), 5, alpha);
+                Parent.Graphics.Scale9Image(x, y, Width, Height, _RadioButton, 5, alpha);
 
             x += (Width / 2) - 1;
             y += (Height / 2) - 1;

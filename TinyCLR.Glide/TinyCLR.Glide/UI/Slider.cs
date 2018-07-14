@@ -163,9 +163,9 @@ namespace GHI.Glide.UI
                 }
 
                 if (_dragging)
-                    Parent.Graphics.Scale9Image(x + _knob.X, y + knobY, _knob.Width, _knob.Height, _Button_Down.GetInternalBitmap(), 5, Alpha);
+                    Parent.Graphics.Scale9Image(x + _knob.X, y + knobY, _knob.Width, _knob.Height, _Button_Down, 5, Alpha);
                 else
-                    Parent.Graphics.Scale9Image(x + _knob.X, y + knobY, _knob.Width, _knob.Height, _Button_Up.GetInternalBitmap(), 5, Alpha);
+                    Parent.Graphics.Scale9Image(x + _knob.X, y + knobY, _knob.Width, _knob.Height, _Button_Up, 5, Alpha);
             }
             else
             {
@@ -187,9 +187,9 @@ namespace GHI.Glide.UI
                 }
 
                 if (_dragging)
-                    Parent.Graphics.Scale9Image(x + knobX, y + _knob.Y, _knob.Width, _knob.Height, _Button_Down.GetInternalBitmap(), 5, Alpha);
+                    Parent.Graphics.Scale9Image(x + knobX, y + _knob.Y, _knob.Width, _knob.Height, _Button_Down, 5, Alpha);
                 else
-                    Parent.Graphics.Scale9Image(x + knobX, y + _knob.Y, _knob.Width, _knob.Height, _Button_Up.GetInternalBitmap(), 5, Alpha);
+                    Parent.Graphics.Scale9Image(x + knobX, y + _knob.Y, _knob.Width, _knob.Height, _Button_Up, 5, Alpha);
             }
         }
 

@@ -10,6 +10,7 @@ using System;
 using GHI.Glide.Display;
 using System.Drawing;
 using TinyCLR.Glide.Properties;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -43,7 +44,7 @@ namespace GHI.Glide.UI
             int y = Parent.Y + Y + TitlebarHeight;
 
             int messageHeight = Height - TitlebarHeight;
-            Parent.Graphics.DrawTextInRect(Message, x + 10, y + 5, Width - 20, messageHeight - 10, System.Drawing.Internal.Bitmap.DT_AlignmentLeft + System.Drawing.Internal.Bitmap.DT_WordWrap, MessageFontColor, MessageFont);
+            Parent.Graphics.DrawTextInRect(Message, x + 10, y + 5, Width - 20, messageHeight - 10, Bitmaps.DT_AlignmentLeft + Bitmaps.DT_WordWrap, MessageFontColor, MessageFont);
         }
 
         /// <summary>

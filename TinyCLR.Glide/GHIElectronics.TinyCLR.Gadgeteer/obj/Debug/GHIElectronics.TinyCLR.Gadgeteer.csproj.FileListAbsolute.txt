@@ -24,3 +24,15 @@ C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgete
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.pdb
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Drawing.dll
 C:\experiment\TinyCLR\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Drawing.pdb
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Gadgeteer.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Gadgeteer.pdb
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Devices.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Drawing.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Pins.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\GHIElectronics.TinyCLR.Storage.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\bin\Debug\mscorlib.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.csprojAssemblyReference.cache
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.csproj.CoreCompileInputs.cache
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.csproj.CopyComplete
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.dll
+C:\Experiment\tinyclr\repo\TinyCLR.Glide\TinyCLR.Glide\GHIElectronics.TinyCLR.Gadgeteer\obj\Debug\GHIElectronics.TinyCLR.Gadgeteer.pdb

@@ -34,18 +34,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="1IncrementalReadDecoders.cs" />
+    <Compile Include="1IXmlLineInfo.cs" />
+    <Compile Include="2IXmlLineInfo.cs" />
+    <Compile Include="BufferBuilder.cs" />
+    <Compile Include="ConformanceLevel.cs" />
+    <Compile Include="EntityHandling.cs" />
+    <Compile Include="IncrementalReadDecoder.cs" />
+    <Compile Include="IncrementalReadDecoders.cs" />
+    <Compile Include="IXmlLineInfo.cs" />
+    <Compile Include="LineInfo.cs" />
+    <Compile Include="NameTable.cs" />
+    <Compile Include="NewLineHandling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadState.cs" />
+    <Compile Include="Ref.cs" />
+    <Compile Include="Res.cs" />
+    <Compile Include="StringUtil.cs" />
+    <Compile Include="System\Text\TextReader.cs" />
+    <Compile Include="ValidateNames.cs" />
+    <Compile Include="ValidationType.cs" />
+    <Compile Include="WhitespaceHandling.cs" />
+    <Compile Include="XmlCharType.cs" />
     <Compile Include="XmlException.cs" />
+    <Compile Include="XmlExceptionHelper.cs" />
+    <Compile Include="XmlNamespace.cs" />
+    <Compile Include="XmlNamespaces.cs" />
     <Compile Include="XmlNameTable.cs" />
-    <Compile Include="XmlNameTable_Entry.cs" />
     <Compile Include="XmlNodeType.cs" />
     <Compile Include="XmlReader.cs" />
     <Compile Include="XmlReaderSettings.cs" />
-    <Compile Include="XmlReader_NamespaceEntry.cs" />
-    <Compile Include="XmlReader_XmlAttribute.cs" />
-    <Compile Include="XmlReader_XmlNode.cs" />
     <Compile Include="XmlSpace.cs" />
+    <Compile Include="XmlTextReader.cs" />
+    <Compile Include="XmlWrappingReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

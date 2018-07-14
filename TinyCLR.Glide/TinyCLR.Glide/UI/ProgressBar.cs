@@ -52,7 +52,7 @@ namespace GHI.Glide.UI
             int y = Parent.Y + Y;
             ushort alpha = (Enabled) ? Alpha : (ushort)(Alpha / 3);
 
-            Parent.Graphics.Scale9Image(x, y, Width, Height, _ProgressBar.GetInternalBitmap(), 4, 5, 4, 5, alpha);
+            Parent.Graphics.Scale9Image(x, y, Width, Height, _ProgressBar, 4, 5, 4, 5, alpha);
 
             x += 1;
             y += 1;
@@ -80,7 +80,7 @@ namespace GHI.Glide.UI
                 y += (Height - 2) - height;
             }
 
-            Parent.Graphics.Scale9Image(x, y, width, height, _ProgressBar_Fill.GetInternalBitmap(), 4, 5, 4, 5, alpha);
+            Parent.Graphics.Scale9Image(x, y, width, height, _ProgressBar_Fill, 4, 5, 4, 5, alpha);
         }
 
         /// <summary>

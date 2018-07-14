@@ -9,7 +9,7 @@ using System;
 //using Microsoft.SPOT.Presentation.Media;
 using GHI.Glide.Display;
 using GHI.Glide.Geom;
-using System.Drawing.Internal;
+using System.Drawing;
 
 namespace GHI.Glide.UI
 {
@@ -40,7 +40,10 @@ namespace GHI.Glide.UI
 
             // Default
             Bitmap = new Bitmap(Width, Height);
-            Bitmap.DrawRectangle(0, 0, 0, 0, Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, Alpha);
+            BitmapGraphic = System.Drawing.Graphics.FromImage(Bitmap);
+            var pen = new Pen(TinyCLR.Glide.Ext.Colors.Fuchsia);
+            BitmapGraphic.DrawRectangle(pen, 0, 0, Width, Height);
+            //BitmapGraphic.DrawRectangle(0, 0, 0, 0, Width, Height, 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, TinyCLR.Glide.Ext.Colors.Fuchsia.ToNativeColor(), 0, 0, Alpha);
         }
 
         /// <summary>
@@ -128,7 +131,7 @@ namespace GHI.Glide.UI
         /// Fills a rectangle on this image's parent container's graphics using it's Bitmap.
         /// </summary>
         /// <param name="rect"></param>
-        public void FillRect(Rectangle rect)
+        public void FillRect(Geom.Rectangle rect)
         {
             if (Bitmap != null)
                 Parent.Graphics.DrawImage(rect.X, rect.Y, Bitmap, rect.X, rect.Y, rect.Width, rect.Height);
@@ -138,7 +141,10 @@ namespace GHI.Glide.UI
         /// Bitmap
         /// </summary>
         public Bitmap Bitmap { get; set; }
-
+        /// <summary>
+        /// Graphic for Bitmap
+        /// </summary>
+        public System.Drawing.Graphics BitmapGraphic { get; set; }
         /// <summary>
         /// Indicates whether or not the image should be stretched if the control is larger than the bitmap.
         /// </summary>

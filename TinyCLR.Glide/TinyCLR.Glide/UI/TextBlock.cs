@@ -10,6 +10,8 @@ using System;
 using GHI.Glide.Display;
 using GHI.Glide.Geom;
 using System.Drawing;
+using TinyCLR.Glide.Ext;
+
 namespace GHI.Glide.UI
 {
     /// <summary>
@@ -53,13 +55,13 @@ namespace GHI.Glide.UI
             int x = Parent.X + X;
             int y = Parent.Y + Y;
 
-            uint flags = System.Drawing.Internal.Bitmap.DT_WordWrap;
+            uint flags = Bitmaps.DT_WordWrap;
             if (TextAlign == HorizontalAlignment.Left)
-                flags += System.Drawing.Internal.Bitmap.DT_AlignmentLeft;
+                flags += Bitmaps.DT_AlignmentLeft;
             else if (TextAlign == HorizontalAlignment.Center)
-                flags += System.Drawing.Internal.Bitmap.DT_AlignmentCenter;
+                flags += Bitmaps.DT_AlignmentCenter;
             else if (TextAlign == HorizontalAlignment.Right)
-                flags += System.Drawing.Internal.Bitmap.DT_AlignmentRight;
+                flags += Bitmaps.DT_AlignmentRight;
 
             if (ShowBackColor)
                 Parent.Graphics.DrawRectangle(Rect, BackColor, Alpha);

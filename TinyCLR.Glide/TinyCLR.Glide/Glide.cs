@@ -22,7 +22,7 @@ namespace GHI.Glide
     /// </summary>
     public static class Glide
     {
-        internal static System.Drawing.Internal.Bitmap screen;
+        internal static System.Drawing.Graphics screen;
         private static Window _mainWindow;
         private static Keyboard _keyboard;
         private static KeyboardText _keyboardText;
@@ -41,7 +41,7 @@ namespace GHI.Glide
             Hdc = displayController.Hdc;
             //HardwareProvider.HwProvider.GetLCDMetrics(out width, out height, out bitsPerPixel, out orientationDeg);
             LCD = new Size() { Width = width, Height = height };
-            screen = new System.Drawing.Internal.Bitmap(width, height);
+            screen = System.Drawing.Graphics.FromHdc(Hdc);// new (width, height);
             IsEmulator = false;
             /*
             // Are we in the emulator?
@@ -58,8 +58,8 @@ namespace GHI.Glide
             // Show loading
             System.Drawing.Bitmap loading = Resources.GetBitmap(Resources.BitmapResources.loading);
 
-            screen.DrawImage((LCD.Width - loading.Width) / 2, (LCD.Height - loading.Height) / 2, loading.GetInternalBitmap(), 0, 0, loading.Width, loading.Height, 0xff);
-            screen.Flush(Hdc);
+            screen.DrawImage(loading, (LCD.Width - loading.Width) / 2, (LCD.Height - loading.Height) / 2, loading.Width, loading.Height);
+            screen.Flush();
             //screen.Flush(0,0,width,height);
         }
         /// <summary>
@@ -82,7 +82,7 @@ namespace GHI.Glide
         /// This is only useful for drawing the bitmap to a display that does not
         /// support bitmap.flush().
         /// </summary>
-        public static System.Drawing.Internal.Bitmap Screen
+        public static System.Drawing.Graphics Screen
         {
             get
             {
@@ -107,7 +107,7 @@ namespace GHI.Glide
             Glide.screenSize.Height = height;
 
             Glide.screen.Dispose();
-            Glide.screen = new System.Drawing.Internal.Bitmap(width, height);
+            Glide.screen = System.Drawing.Graphics.FromHdc(Hdc); //new System.Drawing.Internal.Bitmap(width, height);
 
             Glide.MessageBoxManager = new MessageBoxManager();
         }
@@ -268,7 +268,7 @@ namespace GHI.Glide
 
             int offsetY = y - _mainWindow.ListY;
 
-            screen.DrawImage(x, offsetY, _mainWindow.Graphics.GetBitmap(), x, y, width, height, 0xff);
+            //screen.DrawImage(x, offsetY, _mainWindow.Graphics.GetBitmap(), x, y, width, height, 0xff);
             /*
             // Object must be partially visible so flushing doesn't error.
             if (_mainWindow.Rect.Contains(x, offsetY, width, height))
@@ -276,7 +276,7 @@ namespace GHI.Glide
             */
             // Object must be partially visible so flushing doesn't error.
             if (_mainWindow.Rect.Contains(x, offsetY, width, height))
-                Glide.screen.Flush(Glide.Hdc);
+                Glide.screen.Flush();
         }
 
         /// <summary>

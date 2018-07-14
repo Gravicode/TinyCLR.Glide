@@ -9,7 +9,7 @@ using System.Threading;
 ////using Microsoft.SPOT;
 ////using Microsoft.SPOT.Presentation.Media;
 using GHI.Glide.Display;
-
+using System.Drawing;
 namespace GHI.Glide
 {
     /// <summary>
@@ -106,9 +106,9 @@ namespace GHI.Glide
                     index = 0;
                     while (index < x1.Length)
                     {
-                        Glide.screen.DrawImage(x1[index], fromY, fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
-                        Glide.screen.DrawImage(x2[index], toY, toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(Glide.Hdc);
+                        Glide.screen.DrawImage(fromWindow.Graphics.GetBitmap(), new System.Drawing.Rectangle(x1[index], fromY, fromWindow.Width, fromWindow.Height), new System.Drawing.Rectangle(  0, 0, fromWindow.Width, fromWindow.Height), System.Drawing.GraphicsUnit.Pixel);
+                        Glide.screen.DrawImage(toWindow.Graphics.GetBitmap(), new System.Drawing.Rectangle(x2[index], toY , toWindow.Width, toWindow.Height), new System.Drawing.Rectangle(0, 0, toWindow.Width, toWindow.Height), System.Drawing.GraphicsUnit.Pixel);
+                        Glide.screen.Flush();
                         //Glide.screen.Flush(0, 0, Glide.screen.Width, Glide.screen.Height);
                         index++;
                     }
@@ -121,9 +121,9 @@ namespace GHI.Glide
                     index = 0;
                     while (index < x1.Length)
                     {
-                        Glide.screen.DrawImage(x1[index], fromY, fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
-                        Glide.screen.DrawImage(x2[index], toY, toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(Glide.Hdc);
+                        Glide.screen.DrawImage(fromWindow.Graphics.GetBitmap(), new Rectangle( x1[index], fromY, fromWindow.Width, fromWindow.Height) ,new Rectangle( 0, 0, fromWindow.Width, fromWindow.Height), GraphicsUnit.Pixel);
+                        Glide.screen.DrawImage(toWindow.Graphics.GetBitmap(), new Rectangle( x2[index], toY, toWindow.Width, toWindow.Height) ,new Rectangle( 0, 0, toWindow.Width, toWindow.Height), GraphicsUnit.Pixel);
+                        Glide.screen.Flush();
                         //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }
@@ -136,9 +136,9 @@ namespace GHI.Glide
                     index = 0;
                     while (index < y1.Length)
                     {
-                        Glide.screen.DrawImage(0, y1[index], fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height,0);
-                        Glide.screen.DrawImage(0, y2[index], toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height,0);
-                        Glide.screen.Flush(Glide.Hdc);
+                        Glide.screen.DrawImage(fromWindow.Graphics.GetBitmap(), new Rectangle (0, y1[index], fromWindow.Width, fromWindow.Height),new Rectangle( 0, 0, fromWindow.Width, fromWindow.Height),GraphicsUnit.Pixel);
+                        Glide.screen.DrawImage(toWindow.Graphics.GetBitmap(), new Rectangle(0, y2[index], toWindow.Width, toWindow.Height),new Rectangle( 0, 0, toWindow.Width, toWindow.Height),GraphicsUnit.Pixel);
+                        Glide.screen.Flush();
                         //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }
@@ -151,9 +151,9 @@ namespace GHI.Glide
                     index = 0;
                     while (index < y1.Length)
                     {
-                        Glide.screen.DrawImage(0, y1[index], fromWindow.Graphics.GetBitmap(), 0, 0, fromWindow.Width, fromWindow.Height, 0xff);
-                        Glide.screen.DrawImage(0, y2[index], toWindow.Graphics.GetBitmap(), 0, 0, toWindow.Width, toWindow.Height, 0xff);
-                        Glide.screen.Flush(Glide.Hdc);
+                        Glide.screen.DrawImage(fromWindow.Graphics.GetBitmap(), new Rectangle(0, y1[index], fromWindow.Width, fromWindow.Height), new Rectangle( 0, 0, fromWindow.Width, fromWindow.Height), GraphicsUnit.Pixel);
+                        Glide.screen.DrawImage(toWindow.Graphics.GetBitmap(), new Rectangle(0, y2[index], toWindow.Width, toWindow.Height),new Rectangle( 0, 0, toWindow.Width, toWindow.Height),GraphicsUnit.Pixel);
+                        Glide.screen.Flush();
                         //Glide.screen.Flush(0,0,Glide.screen.Width,Glide.screen.Height);
                         index++;
                     }

@@ -11,6 +11,7 @@ using GHI.Glide.Display;
 using GHI.Glide.Geom;
 using System.Drawing;
 using TinyCLR.Glide.Properties;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -108,12 +109,12 @@ namespace GHI.Glide.UI
             if (_pressed)
             {
                 textY++;
-                Parent.Graphics.Scale9Image(x, y, Width, Height, ButtonDown.GetInternalBitmap(), 5, alpha);
+                Parent.Graphics.Scale9Image(x, y, Width, Height, ButtonDown, 5, alpha);
             }
             else
-                Parent.Graphics.Scale9Image(x, y, Width, Height, ButtonUp.GetInternalBitmap(), 5, alpha);
+                Parent.Graphics.Scale9Image(x, y, Width, Height, ButtonUp, 5, alpha);
 
-            Parent.Graphics.DrawTextInRect(Text, x, textY, Width, Height, System.Drawing.Internal.Bitmap.DT_WordWrap + System.Drawing.Internal.Bitmap.DT_AlignmentCenter, (Enabled) ? FontColor : DisabledFontColor, Font);
+            Parent.Graphics.DrawTextInRect(Text, x, textY, Width, Height, Bitmaps.DT_WordWrap + Bitmaps.DT_AlignmentCenter, (Enabled) ? FontColor : DisabledFontColor, Font);
         }
 
         /// <summary>

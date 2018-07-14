@@ -10,6 +10,7 @@ using System;
 using GHI.Glide.Display;
 using System.Drawing;
 using TinyCLR.Glide.Properties;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -45,8 +46,8 @@ namespace GHI.Glide.UI
             int x = Parent.X + X;
             int y = Parent.Y + Y;
 
-            Parent.Graphics.Scale9Image(x, y, Width, Height, BackImage.GetInternalBitmap(), TitlebarHeight, Alpha);
-            Parent.Graphics.DrawTextInRect(Title, x + 10, y + ((TitlebarHeight - TitleFont.Height) / 2), Width - 20, TitleFont.Height, System.Drawing.Internal.Bitmap.DT_AlignmentLeft, TitleFontColor, TitleFont);
+            Parent.Graphics.Scale9Image(x, y, Width, Height, BackImage, TitlebarHeight, Alpha);
+            Parent.Graphics.DrawTextInRect(Title, x + 10, y + ((TitlebarHeight - TitleFont.Height) / 2), Width - 20, TitleFont.Height, Bitmaps.DT_AlignmentLeft, TitleFontColor, TitleFont);
 
             base.Render();
         }

@@ -12,6 +12,7 @@ using GHI.Glide.Display;
 using GHI.Glide.Geom;
 using System.Drawing;
 using TinyCLR.Glide.Properties;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -81,16 +82,16 @@ namespace GHI.Glide.UI
             if (_pressed)
             {
                 textY++;
-                Parent.Graphics.Scale9Image(x, y, Width, Height, _DropdownText_Down.GetInternalBitmap(), 5, 5, 5, 5, alpha);
-                Parent.Graphics.DrawImage((x + Width) - _DropdownButton_Down.Width, y, _DropdownButton_Down.GetInternalBitmap(), 0, 0, _DropdownButton_Down.Width, _DropdownButton_Down.Height, Alpha);
+                Parent.Graphics.Scale9Image(x, y, Width, Height, _DropdownText_Down, 5, 5, 5, 5, alpha);
+                Parent.Graphics.DrawImage((x + Width) - _DropdownButton_Down.Width, y, _DropdownButton_Down, 0, 0, _DropdownButton_Down.Width, _DropdownButton_Down.Height, Alpha);
             }
             else
             {
-                Parent.Graphics.Scale9Image(x, y, Width, Height, _DropdownText_Up.GetInternalBitmap(), 5, 5, 5, 5, alpha);
-                Parent.Graphics.DrawImage((x + Width) - _DropdownButton_Up.Width, y, _DropdownButton_Up.GetInternalBitmap(), 0, 0, _DropdownButton_Up.Width, _DropdownButton_Up.Height, alpha);
+                Parent.Graphics.Scale9Image(x, y, Width, Height, _DropdownText_Up, 5, 5, 5, 5, alpha);
+                Parent.Graphics.DrawImage((x + Width) - _DropdownButton_Up.Width, y, _DropdownButton_Up, 0, 0, _DropdownButton_Up.Width, _DropdownButton_Up.Height, alpha);
             }
 
-            Parent.Graphics.DrawTextInRect(Text, x + _leftMargin, textY, Width, Height, System.Drawing.Internal.Bitmap.DT_AlignmentLeft, FontColor, Font);
+            Parent.Graphics.DrawTextInRect(Text, x + _leftMargin, textY, Width, Height,Bitmaps.DT_AlignmentLeft, FontColor, Font);
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ using System.Threading;
 using GHI.Glide.Display;
 using GHI.Glide.Geom;
 using System.Drawing;
+using TinyCLR.Glide.Ext;
 
 namespace GHI.Glide.UI
 {
@@ -19,7 +20,7 @@ namespace GHI.Glide.UI
     /// </summary>
     public class List : DisplayObjectContainer
     {
-        private Bitmap _bitmap;
+        private Display.Graphics _bitmap;
         private int _renderedWithNumChildren = 0;
         private int _lastPressY;
         private int _lastListY;
@@ -104,17 +105,17 @@ namespace GHI.Glide.UI
             {
                 _renderedWithNumChildren = NumChildren;
 
-                _bitmap = new Bitmap(Width, NumChildren * this[0].Height);
-                _bitmap.GetInternalBitmap().DrawRectangle(0, 0, 0, 0, _bitmap.Width, _bitmap.Height, 0, 0, TinyCLR.Glide.Ext.Colors.White.ToNativeColor(), 0, 0, 0, 0, 0, Alpha);
+                _bitmap = new Display.Graphics(Width, NumChildren * this[0].Height);
+                _bitmap.DrawRectangle(TinyCLR.Glide.Ext.Colors.White,1, 0, 0, _bitmap.GetBitmap().Width, _bitmap.GetBitmap().Height, 0, 0,Colors.Transparent, 0, 0, Colors.Transparent, 0, 0, Alpha);
 
                 for (int i = 0; i < NumChildren; i++)
                     ((ListItem)this[i]).Render(_bitmap);
 
-                _listMaxY = _bitmap.Height - Height;
+                _listMaxY = _bitmap.GetBitmap().Height - Height;
             }
 
             Graphics.DrawRectangle(TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0, Glide.LCD.Width, Glide.LCD.Height, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, TinyCLR.Glide.Ext.Colors.Black, 0, 0, 0xff);
-            Graphics.DrawImage(X, Y, _bitmap.GetInternalBitmap(), 0, _listY, Width, Height);
+            Graphics.DrawImage(X, Y, _bitmap.GetBitmap(), 0, _listY, Width, Height);
         }
 
         /// <summary>
@@ -192,7 +193,7 @@ namespace GHI.Glide.UI
                 _listY = _lastListY - dragDistance;
                 _listY = GlideUtils.Math.MinMax(_listY, 0, _listMaxY);
 
-                Graphics.DrawImage(X, Y, _bitmap.GetInternalBitmap(), 0, _listY, Width, Height);
+                Graphics.DrawImage(X, Y, _bitmap.GetBitmap(), 0, _listY, Width, Height);
                 Glide.Flush(this);
             }
 

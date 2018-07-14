@@ -8,6 +8,8 @@ using System;
 //using Microsoft.SPOT;
 using GHI.Glide.Display;
 using System.Drawing;
+using TinyCLR.Glide.Ext;
+
 namespace GHI.Glide.UI
 {
     /// <summary>
@@ -33,11 +35,13 @@ namespace GHI.Glide.UI
         /// Renders the ListItem onto the provided bitmap.
         /// </summary>
         /// <param name="bitmap">Bitmap this item will be drawn on.</param>
-        public override void Render(Bitmap bitmap)
+        public override void Render(Display.Graphics bitmap)
         {
+           
             Width = Parent.Width;
-            bitmap.GetInternalBitmap().DrawTextInRect(Label, X, Y + (Height - _font.Height) / 2, Width, _font.Height, System.Drawing.Internal.Bitmap.DT_AlignmentCenter, TinyCLR.Glide.Ext.Colors.Black, _font);
-            bitmap.GetInternalBitmap().DrawLine(TinyCLR.Glide.Ext.Colors.LightGray.ToNativeColor(), 1, 0, Y + Height, Width, Y + Height);
+            
+            bitmap.DrawTextInRect(Label, X, Y + (Height - _font.Height) / 2, Width, _font.Height, Bitmaps.DT_AlignmentCenter, TinyCLR.Glide.Ext.Colors.Black, _font);
+            bitmap.DrawLine(TinyCLR.Glide.Ext.Colors.LightGray, 1, 0, Y + Height, Width, Y + Height);
         }
 
         /// <summary>
